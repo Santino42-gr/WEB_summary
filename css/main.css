@@ -1319,6 +1319,46 @@ body {
     border-color: var(--primary-500);
 }
 
+/* Featured Timeline Item (AI Development) */
+.timeline-item-featured .timeline-content {
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(251, 146, 60, 0.05));
+    border: 2px solid #f97316;
+    box-shadow: 0 8px 32px rgba(249, 115, 22, 0.2);
+}
+
+.timeline-item-featured .timeline-content:hover {
+    border-color: #ea580c;
+    box-shadow: 0 20px 40px rgba(249, 115, 22, 0.3);
+    transform: translateY(-6px);
+}
+
+.timeline-marker-featured {
+    background: #f97316 !important;
+    box-shadow: 0 0 20px rgba(249, 115, 22, 0.6) !important;
+    border: 3px solid #fed7aa !important;
+}
+
+.timeline-item-featured:hover .timeline-marker-featured {
+    background: #ea580c !important;
+    box-shadow: 0 0 30px rgba(249, 115, 22, 0.8) !important;
+    transform: translateX(-50%) scale(1.3) !important;
+}
+
+.timeline-item-featured .timeline-content::before {
+    border-left-color: #f97316 !important;
+    border-right-color: #f97316 !important;
+}
+
+.timeline-item-featured .timeline-title {
+    color: #f97316;
+    font-weight: var(--font-bold);
+}
+
+.timeline-item-featured .timeline-company {
+    color: #ea580c;
+    font-weight: var(--font-semibold);
+}
+
 /* Mobile Timeline Adjustments */
 @media (max-width: 768px) {
     .timeline::before {
