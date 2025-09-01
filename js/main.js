@@ -615,7 +615,7 @@ class AIReadinessChecklist {
 class ProjectsManager {
     constructor() {
         this.projects = [];
-        this.container = document.querySelector('#projects .grid');
+        this.container = document.getElementById('projects-grid');
     }
 
     setProjects(projects) {
@@ -626,33 +626,143 @@ class ProjectsManager {
     render() {
         if (!this.container || !this.projects.length) return;
 
-        this.container.innerHTML = this.projects.map(project => `
-            <div class="project-card" data-aos="fade-up">
-                <div class="project-card-header">
-                    <h3 class="project-card-title">${project.title}</h3>
-                    <p class="project-card-subtitle">${project.subtitle}</p>
-                </div>
-                <p class="project-card-description">${project.description}</p>
-                <div class="project-card-tech">
-                    ${project.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
-                </div>
-                <div class="project-card-footer">
-                    <div class="project-links">
-                        ${project.github ? `<a href="${project.github}" class="project-link" target="_blank">
-                            <i data-lucide="github"></i> GitHub
-                        </a>` : ''}
-                        ${project.demo ? `<a href="${project.demo}" class="project-link" target="_blank">
-                            <i data-lucide="external-link"></i> Demo
-                        </a>` : ''}
+        // Показываем только топ 3 проекта изначально
+        const featuredProjects = this.projects.filter(p => p.featured).slice(0, 3);
+        const projectsToShow = featuredProjects.length > 0 ? featuredProjects : this.projects.slice(0, 3);
+
+        this.container.innerHTML = projectsToShow.map(project => `
+            <div class="project-card" data-aos="fade-up" data-project-id="${project.id}">
+                <div class="project-header">
+                    <div>
+                        <h3 class="project-title">${project.title}</h3>
+                        <p class="project-subtitle">${project.subtitle}</p>
                     </div>
+                    ${project.featured ? '<span class="project-status featured">Featured</span>' : ''}
+                </div>
+                
+                <p class="project-description">${project.description}</p>
+                
+                <div class="project-technologies">
+                    ${project.technologies.map(tech => 
+                        `<span class="project-tech-tag">${tech}</span>`
+                    ).join('')}
+                </div>
+                
+                <div class="project-metrics">
+                    ${project.metrics.slice(0, 2).map(metric => `
+                        <div class="project-metric">
+                            <span class="project-metric-value">${metric.split(' ')[0]}</span>
+                            <span class="project-metric-label">${metric.split(' ').slice(1).join(' ')}</span>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div class="project-actions">
+                    <button class="project-btn project-btn-primary" onclick="openProjectModal(${project.id})">
+                        <i data-lucide="info" style="width: 16px; height: 16px;"></i>
+                        Подробнее
+                    </button>
+                    ${project.github ? `<a href="${project.github}" class="project-btn project-btn-outline" target="_blank">
+                        <i data-lucide="github" style="width: 16px; height: 16px;"></i>
+                        GitHub
+                    </a>` : ''}
+                    ${project.demo ? `<a href="${project.demo}" class="project-btn project-btn-outline" target="_blank">
+                        <i data-lucide="external-link" style="width: 16px; height: 16px;"></i>
+                        Demo
+                    </a>` : ''}
                 </div>
             </div>
         `).join('');
 
-        // Обновляем иконки
+        // Инициализируем иконки Lucide
         if (typeof lucide !== 'undefined') {
             lucide.createIcons();
         }
+
+        this.setupProjectInteractions();
+    }
+
+    setupProjectInteractions() {
+        // Обработчик для карточек проектов
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                // Не открываем модал если кликнули по кнопке
+                if (e.target.closest('.project-btn') || e.target.closest('a')) return;
+                
+                const projectId = parseInt(card.getAttribute('data-project-id'));
+                if (window.openProjectModal) {
+                    window.openProjectModal(projectId);
+                }
+            });
+        });
+
+        // Обработчик для кнопки "Показать больше проектов"
+        const loadMoreBtn = document.getElementById('load-more-projects');
+        if (loadMoreBtn) {
+            loadMoreBtn.addEventListener('click', () => {
+                this.showAllProjects();
+            });
+        }
+    }
+
+    showAllProjects() {
+        if (!this.container || !this.projects.length) return;
+
+        this.container.innerHTML = this.projects.map(project => `
+            <div class="project-card" data-aos="fade-up" data-project-id="${project.id}">
+                <div class="project-header">
+                    <div>
+                        <h3 class="project-title">${project.title}</h3>
+                        <p class="project-subtitle">${project.subtitle}</p>
+                    </div>
+                    ${project.featured ? '<span class="project-status featured">Featured</span>' : ''}
+                </div>
+                
+                <p class="project-description">${project.description}</p>
+                
+                <div class="project-technologies">
+                    ${project.technologies.map(tech => 
+                        `<span class="project-tech-tag">${tech}</span>`
+                    ).join('')}
+                </div>
+                
+                <div class="project-metrics">
+                    ${project.metrics.slice(0, 2).map(metric => `
+                        <div class="project-metric">
+                            <span class="project-metric-value">${metric.split(' ')[0]}</span>
+                            <span class="project-metric-label">${metric.split(' ').slice(1).join(' ')}</span>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div class="project-actions">
+                    <button class="project-btn project-btn-primary" onclick="openProjectModal(${project.id})">
+                        <i data-lucide="info" style="width: 16px; height: 16px;"></i>
+                        Подробнее
+                    </button>
+                    ${project.github ? `<a href="${project.github}" class="project-btn project-btn-outline" target="_blank">
+                        <i data-lucide="github" style="width: 16px; height: 16px;"></i>
+                        GitHub
+                    </a>` : ''}
+                    ${project.demo ? `<a href="${project.demo}" class="project-btn project-btn-outline" target="_blank">
+                        <i data-lucide="external-link" style="width: 16px; height: 16px;"></i>
+                        Demo
+                    </a>` : ''}
+                </div>
+            </div>
+        `).join('');
+
+        // Скрываем кнопку "Показать больше"
+        const loadMoreBtn = document.getElementById('load-more-projects');
+        if (loadMoreBtn) {
+            loadMoreBtn.parentElement.style.display = 'none';
+        }
+
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+
+        this.setupProjectInteractions();
     }
 }
 
@@ -737,6 +847,195 @@ class UtilsHelper {
         };
     }
 }
+
+// ===== MODAL FUNCTIONS =====
+
+// Функции для работы с модальными окнами
+function openProjectModal(projectId) {
+    const app = window.webResumeApp;
+    const project = app.components.projectsManager.projects.find(p => p.id === projectId);
+    
+    if (!project) return;
+
+    const modal = document.getElementById('project-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalBody = document.getElementById('modal-body');
+
+    modalTitle.textContent = project.title;
+    modalBody.innerHTML = `
+        <div class="project-modal-content">
+            <div class="project-modal-image">
+                <i data-lucide="image" style="font-size: 3rem; opacity: 0.3;"></i>
+                <div style="position: absolute; bottom: 10px; right: 10px; background: var(--primary-500); color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px;">
+                    ${project.subtitle}
+                </div>
+            </div>
+            
+            <div>
+                <h4 style="color: var(--dark-50); margin-bottom: var(--space-3);">Описание проекта</h4>
+                <p style="color: var(--dark-300); line-height: 1.6; margin-bottom: var(--space-4);">
+                    ${project.description}
+                </p>
+            </div>
+
+            <div>
+                <h4 style="color: var(--dark-50); margin-bottom: var(--space-3);">Ключевые особенности</h4>
+                <ul class="project-modal-features">
+                    ${project.features.map(feature => `<li>${feature}</li>`).join('')}
+                </ul>
+            </div>
+
+            <div>
+                <h4 style="color: var(--dark-50); margin-bottom: var(--space-3);">Технологии</h4>
+                <div class="project-technologies" style="margin-bottom: var(--space-4);">
+                    ${project.technologies.map(tech => 
+                        `<span class="project-tech-tag">${tech}</span>`
+                    ).join('')}
+                </div>
+            </div>
+
+            <div>
+                <h4 style="color: var(--dark-50); margin-bottom: var(--space-3);">Результаты и метрики</h4>
+                <div class="project-metrics" style="grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));">
+                    ${project.metrics.map(metric => `
+                        <div class="project-metric">
+                            <span class="project-metric-value">${metric.split(' ')[0]}</span>
+                            <span class="project-metric-label">${metric.split(' ').slice(1).join(' ')}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+
+            <div class="project-actions" style="justify-content: center; margin-top: var(--space-6);">
+                ${project.github ? `<a href="${project.github}" class="project-btn project-btn-primary" target="_blank">
+                    <i data-lucide="github" style="width: 16px; height: 16px;"></i>
+                    Посмотреть код
+                </a>` : ''}
+                ${project.demo ? `<a href="${project.demo}" class="project-btn project-btn-outline" target="_blank">
+                    <i data-lucide="external-link" style="width: 16px; height: 16px;"></i>
+                    Открыть демо
+                </a>` : ''}
+            </div>
+        </div>
+    `;
+
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+
+    // Инициализируем иконки
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+}
+
+function closeProjectModal() {
+    const modal = document.getElementById('project-modal');
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+function openContactModal() {
+    const modal = document.getElementById('contact-modal');
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeContactModal() {
+    const modal = document.getElementById('contact-modal');
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+    
+    // Сбрасываем форму
+    const form = document.getElementById('contact-form');
+    const successDiv = document.getElementById('contact-success');
+    
+    if (form) form.style.display = 'block';
+    if (successDiv) successDiv.style.display = 'none';
+    
+    // Очищаем поля формы
+    if (form) form.reset();
+    
+    // Очищаем ошибки
+    document.querySelectorAll('.error-message').forEach(error => {
+        error.classList.remove('show');
+    });
+}
+
+// Обработчики для модальных окон
+document.addEventListener('DOMContentLoaded', function() {
+    // Закрытие модалов по клику на overlay
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('modal-overlay')) {
+            closeProjectModal();
+            closeContactModal();
+        }
+        
+        if (e.target.classList.contains('modal-close') || e.target.closest('.modal-close')) {
+            closeProjectModal();
+            closeContactModal();
+        }
+    });
+
+    // Закрытие модалов по Escape
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeProjectModal();
+            closeContactModal();
+        }
+    });
+
+    // Обработка формы контактов
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Простая валидация
+            const name = document.getElementById('contact-name');
+            const email = document.getElementById('contact-email');
+            const message = document.getElementById('contact-message');
+            
+            let isValid = true;
+            
+            // Очищаем предыдущие ошибки
+            document.querySelectorAll('.error-message').forEach(error => {
+                error.classList.remove('show');
+            });
+            
+            if (!name.value.trim()) {
+                document.getElementById('name-error').textContent = 'Имя обязательно';
+                document.getElementById('name-error').classList.add('show');
+                isValid = false;
+            }
+            
+            if (!email.value.trim() || !email.value.includes('@')) {
+                document.getElementById('email-error').textContent = 'Введите корректный email';
+                document.getElementById('email-error').classList.add('show');
+                isValid = false;
+            }
+            
+            if (!message.value.trim()) {
+                document.getElementById('message-error').textContent = 'Сообщение обязательно';
+                document.getElementById('message-error').classList.add('show');
+                isValid = false;
+            }
+            
+            if (isValid) {
+                // Симуляция отправки
+                setTimeout(() => {
+                    contactForm.style.display = 'none';
+                    document.getElementById('contact-success').style.display = 'block';
+                }, 1000);
+            }
+        });
+    }
+});
+
+// Экспортируем функции в глобальную область
+window.openProjectModal = openProjectModal;
+window.closeProjectModal = closeProjectModal;
+window.openContactModal = openContactModal;
+window.closeContactModal = closeContactModal;
 
 // ===== ИНИЦИАЛИЗАЦИЯ ПРИЛОЖЕНИЯ =====
 

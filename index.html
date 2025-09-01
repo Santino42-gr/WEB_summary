@@ -133,6 +133,10 @@
                             <i data-lucide="folder" class="btn-icon"></i>
                             4 реальных проекта
                         </a>
+                        <button onclick="openContactModal()" class="btn btn-secondary btn-lg">
+                            <i data-lucide="mail" class="btn-icon"></i>
+                            Связаться со мной
+                        </button>
                     </div>
                     
                     <div class="hero-stats" data-aos="fade-up" data-aos-delay="1000">
@@ -206,8 +210,16 @@
                     </p>
                 </div>
                 
-                <div class="grid grid-cols-1 grid-cols-md-2 grid-cols-lg-3 gap-6">
-                    <!-- Project cards will be dynamically inserted here -->
+                <div id="projects-grid" class="projects-grid" data-aos="fade-up" data-aos-delay="200">
+                    <!-- Project cards будут загружены динамически -->
+                </div>
+                
+                <!-- Кнопка "Показать больше проектов" -->
+                <div class="text-center" style="margin-top: var(--space-12);" data-aos="fade-up" data-aos-delay="400">
+                    <button class="btn btn-outline btn-lg" id="load-more-projects">
+                        <i data-lucide="plus" class="btn-icon"></i>
+                        Показать все проекты
+                    </button>
                 </div>
             </div>
         </section>
@@ -224,6 +236,102 @@
                 
                 <div id="skills-container" data-aos="fade-up" data-aos-delay="200">
                     <!-- Skills visualization will be inserted here -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- Career Timeline Section -->
+        <section id="experience" class="section" aria-labelledby="experience-title">
+            <div class="container">
+                <div class="text-center" data-aos="fade-up">
+                    <h2 id="experience-title" class="text-h2">Карьерный путь</h2>
+                    <p class="text-body-lg" style="color: var(--dark-300); max-width: 600px; margin: 0 auto var(--space-12);">
+                        Эволюция в области искусственного интеллекта и разработки
+                    </p>
+                </div>
+                
+                <div class="timeline-container" data-aos="fade-up" data-aos-delay="200">
+                    <div class="timeline">
+                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-date">2024 - Настоящее время</div>
+                                <h3 class="timeline-title">Prompt Engineer & LLM Architect</h3>
+                                <div class="timeline-company">AIronLab</div>
+                                <p class="timeline-description">
+                                    Проектирование и разработка интеллектуальных систем с использованием LLM. 
+                                    Создание RAG-архитектур, мультиагентных команд и интеграция с Mistral API. 
+                                    Руководство командой из 7 ИИ-агентов для ускорения разработки в 5 раз.
+                                </p>
+                                <div class="timeline-skills">
+                                    <span class="timeline-skill">Prompt Engineering</span>
+                                    <span class="timeline-skill">Mistral API</span>
+                                    <span class="timeline-skill">RAG Systems</span>
+                                    <span class="timeline-skill">Multi-Agent</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-date">2023 - 2024</div>
+                                <h3 class="timeline-title">AI Developer & Integration Specialist</h3>
+                                <div class="timeline-company">Freelance</div>
+                                <p class="timeline-description">
+                                    Разработка ИИ-решений для бизнеса: интеграция с CRM системами, 
+                                    создание чат-ботов для Telegram и Авито, автоматизация бизнес-процессов. 
+                                    Специализация на LangChain и векторных базах данных.
+                                </p>
+                                <div class="timeline-skills">
+                                    <span class="timeline-skill">LangChain</span>
+                                    <span class="timeline-skill">Telegram Bots</span>
+                                    <span class="timeline-skill">CRM Integration</span>
+                                    <span class="timeline-skill">Vector Databases</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-date">2022 - 2023</div>
+                                <h3 class="timeline-title">Full-Stack Developer</h3>
+                                <div class="timeline-company">Tech Startup</div>
+                                <p class="timeline-description">
+                                    Разработка веб-приложений на React и Node.js. Изучение машинного обучения 
+                                    и началась специализация в области ИИ. Первые эксперименты с OpenAI API 
+                                    и создание ML Pipeline для обработки данных.
+                                </p>
+                                <div class="timeline-skills">
+                                    <span class="timeline-skill">React</span>
+                                    <span class="timeline-skill">Node.js</span>
+                                    <span class="timeline-skill">Python</span>
+                                    <span class="timeline-skill">OpenAI API</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="400">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-date">2021 - 2022</div>
+                                <h3 class="timeline-title">Junior Developer</h3>
+                                <div class="timeline-company">Software Company</div>
+                                <p class="timeline-description">
+                                    Начало карьеры в разработке. Освоение современных технологий: JavaScript, 
+                                    React, работа с базами данных. Участие в создании корпоративных приложений 
+                                    и изучение архитектурных паттернов.
+                                </p>
+                                <div class="timeline-skills">
+                                    <span class="timeline-skill">JavaScript</span>
+                                    <span class="timeline-skill">HTML/CSS</span>
+                                    <span class="timeline-skill">SQL</span>
+                                    <span class="timeline-skill">Git</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -388,5 +496,84 @@
             </button>
         </div>
     </div>
+
+    <!-- Project Modal -->
+    <div id="project-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modal-title">
+        <div class="modal-overlay" id="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title" class="modal-title">Проект</h3>
+                <button class="modal-close" id="modal-close" aria-label="Закрыть модальное окно">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Содержимое будет загружено динамически -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Form Modal -->
+    <div id="contact-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="contact-modal-title">
+        <div class="modal-overlay" id="contact-modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="contact-modal-title" class="modal-title">Связаться со мной</h3>
+                <button class="modal-close" id="contact-modal-close" aria-label="Закрыть форму">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="contact-form" class="contact-form">
+                    <div class="form-group">
+                        <label for="contact-name">Имя *</label>
+                        <input type="text" id="contact-name" name="name" required>
+                        <span class="error-message" id="name-error"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contact-email">Email *</label>
+                        <input type="email" id="contact-email" name="email" required>
+                        <span class="error-message" id="email-error"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contact-company">Компания</label>
+                        <input type="text" id="contact-company" name="company">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contact-message">Сообщение *</label>
+                        <textarea id="contact-message" name="message" rows="4" required placeholder="Расскажите о вашем проекте..."></textarea>
+                        <span class="error-message" id="message-error"></span>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i data-lucide="send" class="btn-icon"></i>
+                            Отправить сообщение
+                        </button>
+                    </div>
+                </form>
+                
+                <!-- Success state -->
+                <div id="contact-success" class="contact-success" style="display: none;">
+                    <div class="success-icon">
+                        <i data-lucide="check-circle"></i>
+                    </div>
+                    <h4>Сообщение отправлено!</h4>
+                    <p>Спасибо за интерес к моим проектам. Я свяжусь с вами в течение 24 часов.</p>
+                    <button class="btn btn-outline" onclick="closeContactModal()">
+                        Закрыть
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
