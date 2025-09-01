@@ -137,14 +137,14 @@ class WebResumeApp {
         
         try {
             // Загружаем базу знаний
-            const knowledgeBase = await this.loadJSON('/data/knowledge-base.json');
+            const knowledgeBase = await this.loadJSON('./data/knowledge-base.json');
             if (knowledgeBase) {
                 this.components.ragChat.setKnowledgeBase(knowledgeBase);
             }
 
             // Загружаем проекты
             console.log('🔄 Начинаем загрузку проектов...');
-            const projects = await this.loadJSON('/data/projects.json');
+            const projects = await this.loadJSON('./data/projects.json');
             console.log('📦 Данные проектов:', projects);
             
             if (projects) {
@@ -157,20 +157,20 @@ class WebResumeApp {
             }
 
             // Загружаем навыки
-            const skills = await this.loadJSON('/data/skills.json');
+            const skills = await this.loadJSON('./data/skills.json');
             if (skills) {
                 this.components.skillsManager.setSkills(skills.skillCategories);
                 this.components.skillsManager.render();
             }
 
             // Загружаем предложенные вопросы
-            const suggestedQuestions = await this.loadJSON('/data/suggested-questions.json');
+            const suggestedQuestions = await this.loadJSON('./data/suggested-questions.json');
             if (suggestedQuestions) {
                 this.components.ragChat.setSuggestedQuestions(suggestedQuestions);
             }
 
             // Загружаем индекс поиска
-            const searchIndex = await this.loadJSON('/data/search-index.json');
+            const searchIndex = await this.loadJSON('./data/search-index.json');
             if (searchIndex) {
                 this.components.ragChat.setSearchIndex(searchIndex);
             }
@@ -678,18 +678,18 @@ class ProjectsManager {
                         <p class="project-description-interactive">${project.description}</p>
                         
                         <div class="project-metrics-interactive">
-                            ${project.metrics.slice(0, 2).map(metric => `
+                            ${(project.metrics || []).slice(0, 2).map(metric => `
                                 <div class="project-metric-interactive">
-                                    <span class="project-metric-value">${metric.split(' ')[0]}</span>
-                                    <span class="project-metric-label">${metric.split(' ').slice(1).join(' ')}</span>
+                                    <span class="project-metric-value">${(metric || '').split(' ')[0] || ''}</span>
+                                    <span class="project-metric-label">${(metric || '').split(' ').slice(1).join(' ')}</span>
                                 </div>
                             `).join('')}
                         </div>
                         
                         <div class="project-tech-tags-interactive">
-                            ${project.technologies.slice(0, 4).map((tech, techIndex) => {
+                            ${(project.technologies || []).slice(0, 4).map((tech, techIndex) => {
                                 const techClass = this.getTechPillClass(tech, techIndex);
-                                return `<span class="project-tech-pill ${techClass}">${tech}</span>`;
+                                return `<span class="project-tech-pill ${techClass}">${tech || ''}</span>`;
                             }).join('')}
                         </div>
                         
