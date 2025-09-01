@@ -1,0 +1,91 @@
+{
+  "documents": [
+    {
+      "id": "ai-expertise",
+      "title": "Экспертиза в области искусственного интеллекта",
+      "content": "Специализируюсь на разработке интеллектуальных систем с использованием современных технологий машинного обучения. Имею опыт работы с большими языковыми моделями (LLM), создания RAG (Retrieval-Augmented Generation) архитектуры и интеграции AI решений в бизнес-процессы. Работал с GPT-4, Claude, Mistral и другими моделями. Создавал чат-боты, системы автоматизации контента и аналитические платформы.",
+      "keywords": ["AI", "машинное обучение", "LLM", "GPT", "Claude", "Mistral", "чат-бот", "автоматизация"],
+      "category": "expertise",
+      "lastUpdated": "2024-03-15"
+    },
+    {
+      "id": "rag-systems",
+      "title": "RAG системы и архитектура",
+      "content": "RAG (Retrieval-Augmented Generation) - это архитектура, которая сочетает поиск релевантной информации в базе знаний с генерацией ответов с помощью языковых моделей. Я создавал несколько RAG систем для различных доменов: техническая поддержка, образование, корпоративные знания. Использовал векторные базы данных (Pinecone, Chroma), embedding модели, и различные стратегии чанкинга документов.",
+      "keywords": ["RAG", "retrieval", "generation", "векторный поиск", "embedding", "база знаний", "Pinecone", "Chroma"],
+      "category": "technical",
+      "lastUpdated": "2024-03-10"
+    },
+    {
+      "id": "langchain-experience",
+      "title": "Опыт работы с LangChain",
+      "content": "LangChain - основной инструмент для создания LLM приложений. Использую его для построения цепочек обработки, интеграции различных источников данных, создания агентов и инструментов. Работал с chains, agents, tools, memory modules. Создавал custom retrivers, обработчики документов и интеграции с внешними API. Опыт с LangSmith для отладки и мониторинга.",
+      "keywords": ["LangChain", "chains", "agents", "tools", "memory", "retrievers", "LangSmith", "monitoring"],
+      "category": "technical",
+      "lastUpdated": "2024-03-08"
+    },
+    {
+      "id": "technical-stack",
+      "title": "Технический стек и инструменты",
+      "content": "Основные языки программирования: Python (эксперт), JavaScript (продвинутый). Backend: FastAPI, Node.js, Django. Frontend: React, Vue.js, современный CSS/SCSS. Базы данных: PostgreSQL, MongoDB, Redis. ML/AI: TensorFlow, PyTorch, scikit-learn, Hugging Face Transformers. Облачные технологии: AWS, Vercel, Docker. Инструменты: Git, Jupyter, VS Code, Postman.",
+      "keywords": ["Python", "JavaScript", "FastAPI", "React", "PostgreSQL", "TensorFlow", "Docker", "AWS"],
+      "category": "technical",
+      "lastUpdated": "2024-03-12"
+    },
+    {
+      "id": "project-rag-chat",
+      "title": "Проект: RAG Chat System",
+      "content": "Интеллектуальная система вопросов-ответов на базе RAG архитектуры. Система включает векторный поиск по базе знаний, контекстуальную генерацию ответов, обучение на пользовательской обратной связи. Технологии: Python, LangChain, OpenAI API, FastAPI, Pinecone, React. Особенности: поддержка множественных источников данных, настраиваемые параметры генерации, RESTful API для интеграции.",
+      "keywords": ["RAG", "чат", "векторный поиск", "OpenAI", "Pinecone", "FastAPI", "React"],
+      "category": "project",
+      "lastUpdated": "2024-03-20"
+    },
+    {
+      "id": "project-ml-pipeline",
+      "title": "Проект: ML Pipeline Automation",
+      "content": "Автоматизированная система для машинного обучения от сбора данных до деплоя моделей. Включает версионирование экспериментов с MLflow, контейнеризацию с Docker, оркестрацию с Apache Airflow, мониторинг drift данных. Поддерживает A/B тестирование моделей, автоматический откат при снижении качества, continuous deployment в production.",
+      "keywords": ["ML", "pipeline", "автоматизация", "MLflow", "Docker", "Airflow", "мониторинг", "deployment"],
+      "category": "project",
+      "lastUpdated": "2024-01-25"
+    },
+    {
+      "id": "education-background",
+      "title": "Образование и сертификации",
+      "content": "Высшее техническое образование в области информационных технологий. Дополнительные сертификации: AWS Certified Cloud Practitioner, TensorFlow Developer Certificate от Google. Постоянно изучаю новые технологии через онлайн курсы, техническую документацию и практические проекты. Активно участвую в AI/ML сообществе, слежу за последними исследованиями и трендами.",
+      "keywords": ["образование", "сертификация", "AWS", "TensorFlow", "Google", "обучение", "развитие"],
+      "category": "background",
+      "lastUpdated": "2024-02-01"
+    },
+    {
+      "id": "collaboration-approach",
+      "title": "Подход к сотрудничеству и работе в команде",
+      "content": "Практикую agile методологии, опыт работы в cross-functional командах. Предпочитаю итеративный подход к разработке с быстрой обратной связью. Использую Git flow для версионирования, пишу чистый, документированный код. Опыт code review, парного программирования. Коммуникабелен, готов объяснять технические решения не-техническим коллегам.",
+      "keywords": ["agile", "команда", "Git", "code review", "документация", "коммуникация"],
+      "category": "soft-skills",
+      "lastUpdated": "2024-02-15"
+    },
+    {
+      "id": "future-interests",
+      "title": "Планы развития и интересы",
+      "content": "Интересуюсь развитием multimodal AI, computer vision, reinforcement learning. Планирую изучать новые LLM архитектуры, квантовые вычисления для ML. Хочу развиваться в направлении AI ethics и responsible AI. Рассматриваю возможности применения AI в образовании, healthcare, climate tech. Открыт к новым вызовам и интересным проектам.",
+      "keywords": ["multimodal", "computer vision", "reinforcement learning", "квантовые вычисления", "AI ethics", "healthcare"],
+      "category": "future",
+      "lastUpdated": "2024-03-01"
+    }
+  ],
+  "categories": ["expertise", "technical", "project", "background", "soft-skills", "future"],
+  "suggestedQuestions": [
+    "Расскажи о своем опыте с LLM моделями",
+    "Какие RAG проекты ты делал?",
+    "Твой технический стек для AI разработки",
+    "Опыт работы с LangChain",
+    "Как ты подходишь к командной работе?",
+    "Какие у тебя планы развития в AI?",
+    "Расскажи о проекте ML Pipeline Automation",
+    "Какие сертификации у тебя есть?",
+    "Опыт с векторными базами данных",
+    "Как ты изучаешь новые технологии?"
+  ],
+  "lastUpdated": "2024-03-20",
+  "version": "1.0"
+}

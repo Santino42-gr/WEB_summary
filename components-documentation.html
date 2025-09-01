@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIrLab Design System - Документация компонентов</title>
+  <link rel="stylesheet" href="design-system.css">
+  <style>
+    /* Специальные стили для документации */
+    .docs-section {
+      margin: var(--space-12) 0;
+      padding: var(--space-8);
+      border: 1px solid var(--dark-700);
+      border-radius: var(--radius-lg);
+      background-color: var(--dark-800);
+    }
+    
+    .docs-example {
+      background-color: var(--dark-900);
+      border: 1px solid var(--dark-700);
+      border-radius: var(--radius-base);
+      padding: var(--space-6);
+      margin: var(--space-4) 0;
+    }
+    
+    .docs-code {
+      background-color: var(--dark-700);
+      border-radius: var(--radius-base);
+      padding: var(--space-4);
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--dark-300);
+      overflow-x: auto;
+      white-space: pre-wrap;
+      margin: var(--space-4) 0;
+    }
+    
+    .color-swatch {
+      display: inline-block;
+      width: 60px;
+      height: 60px;
+      border-radius: var(--radius-base);
+      border: 1px solid var(--dark-700);
+      margin-right: var(--space-3);
+      vertical-align: top;
+    }
+    
+    .color-info {
+      display: inline-block;
+      vertical-align: top;
+      margin-top: var(--space-2);
+    }
+    
+    .toc {
+      background-color: var(--dark-800);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      margin-bottom: var(--space-12);
+    }
+    
+    .toc ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .toc li {
+      margin: var(--space-2) 0;
+    }
+    
+    .toc a {
+      color: var(--dark-300);
+      text-decoration: none;
+      transition: color var(--duration-200) var(--ease-out);
+    }
+    
+    .toc a:hover {
+      color: var(--primary-500);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="section">
+      <h1 class="text-hero animated-text">AIrLab Design System</h1>
+      <p class="text-body-lg" style="color: var(--dark-300);">Комплексная дизайн-система для интерактивного веб-резюме с RAG-чатом</p>
+    </header>
+
+    <!-- Оглавление -->
+    <div class="toc">
+      <h2 class="text-h3">Содержание</h2>
+      <ul>
+        <li><a href="#colors">Цветовая палитра</a></li>
+        <li><a href="#typography">Типографика</a></li>
+        <li><a href="#buttons">Кнопки</a></li>
+        <li><a href="#cards">Карточки</a></li>
+        <li><a href="#forms">Формы</a></li>
+        <li><a href="#chat">RAG Chat</a></li>
+        <li><a href="#navigation">Навигация</a></li>
+        <li><a href="#status">Индикаторы состояния</a></li>
+        <li><a href="#animations">Анимации</a></li>
+        <li><a href="#layout">Layout утилиты</a></li>
+      </ul>
+    </div>
+
+    <!-- Цветовая палитра -->
+    <section id="colors" class="docs-section">
+      <h2 class="text-h2">Цветовая палитра</h2>
+      <p style="color: var(--dark-300);">Темная тема с акцентным синим цветом, вдохновленная референсным сайтом Athos Dark.</p>
+      
+      <h3 class="text-h3">Основные цвета</h3>
+      <div class="docs-example">
+        <div class="flex gap-6" style="flex-wrap: wrap;">
+          <div>
+            <div class="color-swatch" style="background-color: var(--dark-900);"></div>
+            <div class="color-info">
+              <div class="text-body-sm" style="font-weight: var(--font-medium);">Primary Background</div>
+              <div class="text-caption" style="color: var(--dark-400);">#0f172a</div>
+              <div class="text-caption" style="color: var(--dark-400);">--dark-900</div>
+            </div>
+          </div>
+          <div>
+            <div class="color-swatch" style="background-color: var(--dark-800);"></div>
+            <div class="color-info">
+              <div class="text-body-sm" style="font-weight: var(--font-medium);">Secondary Background</div>
+              <div class="text-caption" style="color: var(--dark-400);">#1e293b</div>
+              <div class="text-caption" style="color: var(--dark-400);">--dark-800</div>
+            </div>
+          </div>
+          <div>
+            <div class="color-swatch" style="background-color: var(--primary-500);"></div>
+            <div class="color-info">
+              <div class="text-body-sm" style="font-weight: var(--font-medium);">Accent Primary</div>
+              <div class="text-caption" style="color: var(--dark-400);">#3b82f6</div>
+              <div class="text-caption" style="color: var(--dark-400);">--primary-500</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="text-h3">Статусные цвета</h3>
+      <div class="docs-example">
+        <div class="flex gap-6" style="flex-wrap: wrap;">
+          <div>
+            <div class="color-swatch" style="background-color: var(--success);"></div>
+            <div class="color-info">
+              <div class="text-body-sm" style="font-weight: var(--font-medium);">Success</div>
+              <div class="text-caption" style="color: var(--dark-400);">#16a34a</div>
+            </div>
+          </div>
+          <div>
+            <div class="color-swatch" style="background-color: var(--warning);"></div>
+            <div class="color-info">
+              <div class="text-body-sm" style="font-weight: var(--font-medium);">Warning</div>
+              <div class="text-caption" style="color: var(--dark-400);">#f59e0b</div>
+            </div>
+          </div>
+          <div>
+            <div class="color-swatch" style="background-color: var(--error);"></div>
+            <div class="color-info">
+              <div class="text-body-sm" style="font-weight: var(--font-medium);">Error</div>
+              <div class="text-caption" style="color: var(--dark-400);">#dc2626</div>
+            </div>
+          </div>
+          <div>
+            <div class="color-swatch" style="background-color: var(--primary-500);"></div>
+            <div class="color-info">
+              <div class="text-body-sm" style="font-weight: var(--font-medium);">Info</div>
+              <div class="text-caption" style="color: var(--dark-400);">#3b82f6</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Типографика -->
+    <section id="typography" class="docs-section">
+      <h2 class="text-h2">Типографика</h2>
+      <p style="color: var(--dark-300);">Система шрифтов, основанная на Inter с четкой иерархией размеров.</p>
+      
+      <div class="docs-example">
+        <h1 class="text-hero">Hero заголовок (60px)</h1>
+        <h1 class="text-h1">Заголовок H1 (48px)</h1>
+        <h2 class="text-h2">Заголовок H2 (36px)</h2>
+        <h3 class="text-h3">Заголовок H3 (30px)</h3>
+        <p class="text-body-lg">Большой текст (18px)</p>
+        <p class="text-body">Основной текст (16px)</p>
+        <p class="text-body-sm">Малый текст (14px)</p>
+        <p class="text-caption">Очень малый текст (12px)</p>
+      </div>
+
+      <div class="docs-code">
+&lt;h1 class="text-hero"&gt;Hero заголовок&lt;/h1&gt;
+&lt;h2 class="text-h1"&gt;Основной заголовок&lt;/h2&gt;
+&lt;p class="text-body-lg"&gt;Большой текст&lt;/p&gt;
+&lt;p class="text-body"&gt;Основной текст&lt;/p&gt;</div>
+
+      <h3 class="text-h3">Анимированный текст</h3>
+      <div class="docs-example">
+        <h2 class="text-h2 animated-text">Анимированный градиентный текст</h2>
+      </div>
+      <div class="docs-code">
+&lt;h2 class="text-h2 animated-text"&gt;Анимированный текст&lt;/h2&gt;</div>
+    </section>
+
+    <!-- Кнопки -->
+    <section id="buttons" class="docs-section">
+      <h2 class="heading-2">Кнопки</h2>
+      <p class="text-secondary">Система кнопок с различными стилями и размерами, оптимизированная для accessibility.</p>
+      
+      <h3 class="heading-3">Основные стили</h3>
+      <div class="docs-example">
+        <div class="flex gap-4" style="flex-wrap: wrap; align-items: center;">
+          <button class="btn btn-primary">Primary</button>
+          <button class="btn btn-secondary">Secondary</button>
+          <button class="btn btn-outline">Outline</button>
+          <button class="btn btn-ghost">Ghost</button>
+          <button class="btn btn-primary" disabled>Disabled</button>
+        </div>
+      </div>
+
+      <div class="docs-code">
+&lt;button class="btn btn-primary"&gt;Primary&lt;/button&gt;
+&lt;button class="btn btn-secondary"&gt;Secondary&lt;/button&gt;
+&lt;button class="btn btn-outline"&gt;Outline&lt;/button&gt;
+&lt;button class="btn btn-ghost"&gt;Ghost&lt;/button&gt;</div>
+
+      <h3 class="heading-3">Размеры</h3>
+      <div class="docs-example">
+        <div class="flex gap-4" style="flex-wrap: wrap; align-items: center;">
+          <button class="btn btn-primary btn-sm">Small</button>
+          <button class="btn btn-primary">Default</button>
+          <button class="btn btn-primary btn-lg">Large</button>
+          <button class="btn btn-primary btn-xl">Extra Large</button>
+        </div>
+      </div>
+
+      <div class="docs-code">
+&lt;button class="btn btn-primary btn-sm"&gt;Small&lt;/button&gt;
+&lt;button class="btn btn-primary"&gt;Default&lt;/button&gt;
+&lt;button class="btn btn-primary btn-lg"&gt;Large&lt;/button&gt;
+&lt;button class="btn btn-primary btn-xl"&gt;Extra Large&lt;/button&gt;</div>
+    </section>
+
+    <!-- Карточки -->
+    <section id="cards" class="docs-section">
+      <h2 class="heading-2">Карточки</h2>
+      <p class="text-secondary">Гибкая система карточек для различных типов контента.</p>
+      
+      <h3 class="heading-3">Базовая карточка</h3>
+      <div class="docs-example">
+        <div class="card" style="max-width: 400px;">
+          <div class="card-header">
+            <h3 class="card-title">Заголовок карточки</h3>
+            <p class="card-subtitle">Подзаголовок</p>
+          </div>
+          <div class="card-content">
+            <p>Содержимое карточки с основной информацией. Может содержать любой контент.</p>
+          </div>
+          <div class="card-footer">
+            <span class="text-sm text-muted">Дополнительная информация</span>
+            <button class="btn btn-sm btn-primary">Действие</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="docs-code">
+&lt;div class="card"&gt;
+  &lt;div class="card-header"&gt;
+    &lt;h3 class="card-title"&gt;Заголовок карточки&lt;/h3&gt;
+    &lt;p class="card-subtitle"&gt;Подзаголовок&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="card-content"&gt;
+    &lt;p&gt;Содержимое карточки&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="card-footer"&gt;
+    &lt;span&gt;Информация&lt;/span&gt;
+    &lt;button class="btn btn-sm btn-primary"&gt;Действие&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</div>
+
+      <h3 class="heading-3">Специализированные карточки</h3>
+      <div class="docs-example">
+        <div class="grid grid-3" style="gap: var(--spacing-6);">
+          <div class="card card-project">
+            <h4 class="card-title">Проект</h4>
+            <p class="text-sm text-secondary">Карточка проекта с акцентной полосой сверху</p>
+          </div>
+          
+          <div class="card card-skill">
+            <h4 class="card-title">Навык</h4>
+            <p class="text-sm text-secondary">Центрированная карточка навыка</p>
+          </div>
+          
+          <div class="card card-experience">
+            <h4 class="card-title">Опыт</h4>
+            <p class="text-sm text-secondary">Карточка опыта с левой границей</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="docs-code">
+&lt;div class="card card-project"&gt;...&lt;/div&gt;  &lt;!-- Проект --&gt;
+&lt;div class="card card-skill"&gt;...&lt;/div&gt;    &lt;!-- Навык --&gt;
+&lt;div class="card card-experience"&gt;...&lt;/div&gt; &lt;!-- Опыт --&gt;</div>
+    </section>
+
+    <!-- RAG Chat -->
+    <section id="chat" class="docs-section">
+      <h2 class="heading-2">RAG Chat Компоненты</h2>
+      <p class="text-secondary">Специализированные компоненты для интерфейса RAG-чата.</p>
+      
+      <div class="docs-example">
+        <div class="chat-container">
+          <div class="chat-header">
+            <h3 class="chat-title">AI Ассистент</h3>
+            <div class="chat-status">
+              <div class="chat-status-dot"></div>
+              <span>Онлайн</span>
+            </div>
+          </div>
+          
+          <div class="chat-messages">
+            <div class="chat-message chat-message-ai">
+              <div class="chat-avatar chat-avatar-ai">AI</div>
+              <div class="chat-bubble chat-bubble-ai">
+                Привет! Я AI-ассистент. Чем могу помочь?
+              </div>
+            </div>
+            
+            <div class="chat-message chat-message-user">
+              <div class="chat-avatar chat-avatar-user">Вы</div>
+              <div class="chat-bubble chat-bubble-user">
+                Расскажи о моем опыте работы
+              </div>
+            </div>
+            
+            <div class="chat-message chat-message-ai">
+              <div class="chat-avatar chat-avatar-ai">AI</div>
+              <div class="chat-bubble chat-bubble-ai">
+                На основе вашего резюме, у вас есть опыт в области машинного обучения и разработки...
+              </div>
+            </div>
+          </div>
+          
+          <div class="chat-input-container">
+            <textarea class="chat-input" placeholder="Задайте вопрос..." rows="1"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="docs-code">
+&lt;div class="chat-container"&gt;
+  &lt;div class="chat-header"&gt;
+    &lt;h3 class="chat-title"&gt;AI Ассистент&lt;/h3&gt;
+    &lt;div class="chat-status"&gt;
+      &lt;div class="chat-status-dot"&gt;&lt;/div&gt;
+      &lt;span&gt;Онлайн&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  
+  &lt;div class="chat-messages"&gt;
+    &lt;div class="chat-message chat-message-ai"&gt;
+      &lt;div class="chat-avatar chat-avatar-ai"&gt;AI&lt;/div&gt;
+      &lt;div class="chat-bubble chat-bubble-ai"&gt;
+        Сообщение AI
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  
+  &lt;div class="chat-input-container"&gt;
+    &lt;textarea class="chat-input" placeholder="Задайте вопрос..."&gt;&lt;/textarea&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</div>
+    </section>
+
+    <!-- Формы -->
+    <section id="forms" class="docs-section">
+      <h2 class="heading-2">Формы</h2>
+      <p class="text-secondary">Компоненты форм с валидацией и состояниями.</p>
+      
+      <div class="docs-example">
+        <form style="max-width: 400px;">
+          <div class="form-group">
+            <label class="form-label" for="email">Email</label>
+            <input class="form-input" type="email" id="email" placeholder="your@email.com">
+            <div class="form-help">Мы никогда не передаем ваш email третьим лицам</div>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label" for="message">Сообщение</label>
+            <textarea class="form-input" id="message" rows="4" placeholder="Ваше сообщение..."></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label" for="error-field">Поле с ошибкой</label>
+            <input class="form-input" type="text" id="error-field" style="border-color: var(--color-error);">
+            <div class="form-error">Это поле обязательно для заполнения</div>
+          </div>
+          
+          <button class="btn btn-primary" type="submit">Отправить</button>
+        </form>
+      </div>
+
+      <div class="docs-code">
+&lt;div class="form-group"&gt;
+  &lt;label class="form-label" for="email"&gt;Email&lt;/label&gt;
+  &lt;input class="form-input" type="email" id="email" placeholder="your@email.com"&gt;
+  &lt;div class="form-help"&gt;Подсказка&lt;/div&gt;
+&lt;/div&gt;</div>
+    </section>
+
+    <!-- Навигация -->
+    <section id="navigation" class="docs-section">
+      <h2 class="heading-2">Навигация</h2>
+      <p class="text-secondary">Компоненты навигации с поддержкой sticky позиционирования.</p>
+      
+      <div class="docs-example">
+        <div style="background-color: var(--color-bg-primary); padding: var(--spacing-4); border-radius: var(--radius-base);">
+          <nav class="nav-container" style="position: relative; top: 0;">
+            <div class="nav-content">
+              <a href="#" class="nav-logo">AIrLab</a>
+              <ul class="nav-menu">
+                <li><a href="#" class="nav-link active">Главная</a></li>
+                <li><a href="#" class="nav-link">Проекты</a></li>
+                <li><a href="#" class="nav-link">Опыт</a></li>
+                <li><a href="#" class="nav-link">Контакты</a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+
+      <div class="docs-code">
+&lt;nav class="nav-container"&gt;
+  &lt;div class="nav-content"&gt;
+    &lt;a href="#" class="nav-logo"&gt;AIrLab&lt;/a&gt;
+    &lt;ul class="nav-menu"&gt;
+      &lt;li&gt;&lt;a href="#" class="nav-link active"&gt;Главная&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#" class="nav-link"&gt;Проекты&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/nav&gt;</div>
+    </section>
+
+    <!-- Индикаторы состояния -->
+    <section id="status" class="docs-section">
+      <h2 class="heading-2">Индикаторы состояния</h2>
+      <p class="text-secondary">Компоненты для отображения различных состояний системы.</p>
+      
+      <h3 class="heading-3">Loading Spinner</h3>
+      <div class="docs-example">
+        <div class="loading-spinner"></div>
+      </div>
+
+      <h3 class="heading-3">Status Badges</h3>
+      <div class="docs-example">
+        <div class="flex gap-4" style="flex-wrap: wrap; align-items: center;">
+          <div class="status-badge status-badge-success">Успех</div>
+          <div class="status-badge status-badge-warning">Предупреждение</div>
+          <div class="status-badge status-badge-error">Ошибка</div>
+          <div class="status-badge status-badge-info">Информация</div>
+        </div>
+      </div>
+
+      <div class="docs-code">
+&lt;div class="loading-spinner"&gt;&lt;/div&gt;
+
+&lt;div class="status-badge status-badge-success"&gt;Успех&lt;/div&gt;
+&lt;div class="status-badge status-badge-warning"&gt;Предупреждение&lt;/div&gt;
+&lt;div class="status-badge status-badge-error"&gt;Ошибка&lt;/div&gt;
+&lt;div class="status-badge status-badge-info"&gt;Информация&lt;/div&gt;</div>
+    </section>
+
+    <!-- Анимации -->
+    <section id="animations" class="docs-section">
+      <h2 class="heading-2">Анимации</h2>
+      <p class="text-secondary">Система анимаций для улучшения пользовательского опыта.</p>
+      
+      <div class="docs-example">
+        <div class="grid grid-2" style="gap: var(--spacing-6);">
+          <div class="card fade-in">
+            <h4 class="card-title">Fade In</h4>
+            <p class="text-sm">Появление с затуханием</p>
+          </div>
+          
+          <div class="card slide-up">
+            <h4 class="card-title">Slide Up</h4>
+            <p class="text-sm">Появление снизу вверх</p>
+          </div>
+          
+          <div class="card slide-in-left">
+            <h4 class="card-title">Slide In Left</h4>
+            <p class="text-sm">Появление слева направо</p>
+          </div>
+          
+          <div class="card scale-in">
+            <h4 class="card-title">Scale In</h4>
+            <p class="text-sm">Появление с масштабированием</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="docs-code">
+&lt;div class="fade-in"&gt;Элемент с анимацией fade-in&lt;/div&gt;
+&lt;div class="slide-up"&gt;Элемент с анимацией slide-up&lt;/div&gt;
+&lt;div class="slide-in-left"&gt;Элемент с анимацией slide-in-left&lt;/div&gt;
+&lt;div class="scale-in"&gt;Элемент с анимацией scale-in&lt;/div&gt;</div>
+    </section>
+
+    <!-- Layout утилиты -->
+    <section id="layout" class="docs-section">
+      <h2 class="heading-2">Layout утилиты</h2>
+      <p class="text-secondary">Утилитарные классы для создания макетов.</p>
+      
+      <h3 class="heading-3">Grid System</h3>
+      <div class="docs-example">
+        <div class="grid grid-3 gap-4">
+          <div class="card"><div class="card-title">Grid Item 1</div></div>
+          <div class="card"><div class="card-title">Grid Item 2</div></div>
+          <div class="card"><div class="card-title">Grid Item 3</div></div>
+        </div>
+      </div>
+
+      <h3 class="heading-3">Flexbox утилиты</h3>
+      <div class="docs-example">
+        <div class="flex justify-between items-center" style="background-color: var(--color-bg-secondary); padding: var(--spacing-4); border-radius: var(--radius-base);">
+          <span>Левый элемент</span>
+          <span>Правый элемент</span>
+        </div>
+      </div>
+
+      <div class="docs-code">
+&lt;!-- Grid Layout --&gt;
+&lt;div class="grid grid-3 gap-4"&gt;
+  &lt;div&gt;Item 1&lt;/div&gt;
+  &lt;div&gt;Item 2&lt;/div&gt;
+  &lt;div&gt;Item 3&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Flexbox --&gt;
+&lt;div class="flex justify-between items-center"&gt;
+  &lt;span&gt;Левый&lt;/span&gt;
+  &lt;span&gt;Правый&lt;/span&gt;
+&lt;/div&gt;</div>
+
+      <h3 class="heading-3">Spacing утилиты</h3>
+      <div class="docs-example">
+        <div class="flex gap-2">
+          <div style="background-color: var(--color-accent-primary); width: 40px; height: 40px; border-radius: var(--radius-base);"></div>
+          <div style="background-color: var(--color-accent-primary); width: 40px; height: 40px; border-radius: var(--radius-base);"></div>
+        </div>
+        <div class="flex gap-6" style="margin-top: var(--spacing-4);">
+          <div style="background-color: var(--color-success); width: 40px; height: 40px; border-radius: var(--radius-base);"></div>
+          <div style="background-color: var(--color-success); width: 40px; height: 40px; border-radius: var(--radius-base);"></div>
+        </div>
+      </div>
+
+      <div class="docs-code">
+&lt;div class="flex gap-2"&gt;Малый отступ&lt;/div&gt;
+&lt;div class="flex gap-6"&gt;Большой отступ&lt;/div&gt;</div>
+    </section>
+
+    <!-- Примеры использования -->
+    <section class="docs-section">
+      <h2 class="heading-2">Примеры комплексного использования</h2>
+      
+      <h3 class="heading-3">Hero секция</h3>
+      <div class="docs-example">
+        <div class="section text-center">
+          <h1 class="heading-hero animated-text">AI-специалист и разработчик</h1>
+          <p class="text-lg text-secondary" style="max-width: 600px; margin: 0 auto var(--spacing-8);">
+            Создаю интеллектуальные решения с использованием машинного обучения и современных технологий разработки
+          </p>
+          <div class="flex gap-4 justify-center">
+            <button class="btn btn-primary btn-lg">Посмотреть проекты</button>
+            <button class="btn btn-outline btn-lg">Скачать резюме</button>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="heading-3">Секция проектов</h3>
+      <div class="docs-example">
+        <div class="section">
+          <h2 class="heading-2">Мои проекты</h2>
+          <div class="grid grid-3 gap-6">
+            <div class="card card-project card-interactive">
+              <h3 class="card-title">RAG Chat System</h3>
+              <p class="card-content">Система чат-бота с использованием RAG архитектуры для точных ответов на основе базы знаний</p>
+              <div class="card-footer">
+                <div class="flex gap-2">
+                  <span class="status-badge status-badge-info">Python</span>
+                  <span class="status-badge status-badge-info">LangChain</span>
+                </div>
+                <button class="btn btn-sm btn-outline">Подробнее</button>
+              </div>
+            </div>
+            
+            <div class="card card-project card-interactive">
+              <h3 class="card-title">ML Pipeline</h3>
+              <p class="card-content">Автоматизированный пайплайн для обучения и деплоя моделей машинного обучения</p>
+              <div class="card-footer">
+                <div class="flex gap-2">
+                  <span class="status-badge status-badge-success">MLFlow</span>
+                  <span class="status-badge status-badge-success">Docker</span>
+                </div>
+                <button class="btn btn-sm btn-outline">Подробнее</button>
+              </div>
+            </div>
+            
+            <div class="card card-project card-interactive">
+              <h3 class="card-title">Data Analytics</h3>
+              <p class="card-content">Система аналитики данных с интерактивными дашбордами и прогнозированием</p>
+              <div class="card-footer">
+                <div class="flex gap-2">
+                  <span class="status-badge status-badge-warning">React</span>
+                  <span class="status-badge status-badge-warning">D3.js</span>
+                </div>
+                <button class="btn btn-sm btn-outline">Подробнее</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="section-sm text-center">
+      <p class="text-muted">AIrLab Design System v1.0 - Создано для интерактивного веб-резюме</p>
+    </footer>
+  </div>
+
+  <script>
+    // Простая демонстрация интерактивности
+    document.addEventListener('DOMContentLoaded', function() {
+      // Автоматическое изменение размера textarea в чате
+      const chatInput = document.querySelector('.chat-input');
+      if (chatInput) {
+        chatInput.addEventListener('input', function() {
+          this.style.height = 'auto';
+          this.style.height = this.scrollHeight + 'px';
+        });
+      }
+      
+      // Плавное появление элементов при скролле
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      // Наблюдаем за всеми секциями документации
+      document.querySelectorAll('.docs-section').forEach(section => {
+        section.style.opacity = '0';
+        section.style.transform = 'translateY(20px)';
+        section.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+        observer.observe(section);
+      });
+    });
+  </script>
+</body>
+</html>

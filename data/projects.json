@@ -1,0 +1,147 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "RAG Chat System",
+      "subtitle": "Интеллектуальная система вопросов-ответов",
+      "description": "Система чат-бота с использованием RAG (Retrieval-Augmented Generation) архитектуры для предоставления точных ответов на основе базы знаний. Включает векторный поиск, контекстуальную генерацию и обучение на пользовательской обратной связи.",
+      "technologies": ["Python", "LangChain", "OpenAI API", "FastAPI", "Pinecone", "React"],
+      "features": [
+        "Векторный поиск по базе знаний",
+        "Контекстуальная генерация ответов",
+        "Обучение на feedback пользователей",
+        "RESTful API для интеграции"
+      ],
+      "github": "https://github.com/example/rag-chat-system",
+      "demo": "https://rag-chat-demo.vercel.app",
+      "image": "/images/rag-chat-preview.jpg",
+      "featured": true,
+      "status": "completed",
+      "startDate": "2024-01-15",
+      "endDate": "2024-03-20"
+    },
+    {
+      "id": 2,
+      "title": "ML Pipeline Automation",
+      "subtitle": "Автоматизированный пайплайн машинного обучения",
+      "description": "Комплексная система автоматизации процессов машинного обучения от сбора данных до деплоя моделей в продакшен. Включает мониторинг производительности, A/B тестирование и автоматический откат моделей.",
+      "technologies": ["Python", "MLflow", "Docker", "Kubernetes", "Apache Airflow", "PostgreSQL"],
+      "features": [
+        "Автоматическое обучение моделей",
+        "Версионирование экспериментов",
+        "Continuous deployment",
+        "Мониторинг drift данных"
+      ],
+      "github": "https://github.com/example/ml-pipeline",
+      "demo": null,
+      "image": "/images/ml-pipeline-preview.jpg",
+      "featured": true,
+      "status": "completed",
+      "startDate": "2023-09-10",
+      "endDate": "2024-01-25"
+    },
+    {
+      "id": 3,
+      "title": "Data Analytics Dashboard",
+      "subtitle": "Интерактивная аналитическая панель",
+      "description": "Современный дашборд для анализа больших данных с интерактивными визуализациями, прогнозированием трендов и экспортом отчетов. Поддерживает подключение к различным источникам данных.",
+      "technologies": ["React", "D3.js", "Node.js", "ClickHouse", "WebSocket", "Chart.js"],
+      "features": [
+        "Интерактивные графики и диаграммы",
+        "Real-time обновления данных",
+        "Прогнозирование трендов",
+        "Экспорт в различные форматы"
+      ],
+      "github": "https://github.com/example/analytics-dashboard",
+      "demo": "https://analytics-demo.vercel.app",
+      "image": "/images/analytics-preview.jpg",
+      "featured": false,
+      "status": "completed",
+      "startDate": "2023-06-01",
+      "endDate": "2023-08-30"
+    },
+    {
+      "id": 4,
+      "title": "AI Content Generator",
+      "subtitle": "Генератор контента с использованием ИИ",
+      "description": "Инструмент для автоматической генерации контента (статьи, посты, описания товаров) с использованием больших языковых моделей. Поддерживает различные стили и форматы контента.",
+      "technologies": ["Python", "OpenAI GPT-4", "Streamlit", "LangChain", "Redis", "PostgreSQL"],
+      "features": [
+        "Генерация контента в разных стилях",
+        "Оптимизация для SEO",
+        "Пакетная обработка",
+        "API для интеграции"
+      ],
+      "github": "https://github.com/example/ai-content-generator",
+      "demo": "https://ai-content-demo.streamlit.app",
+      "image": "/images/ai-content-preview.jpg",
+      "featured": false,
+      "status": "in_progress",
+      "startDate": "2024-02-01",
+      "endDate": null
+    },
+    {
+      "id": 5,
+      "title": "Smart Recommendation Engine",
+      "subtitle": "Интеллектуальная система рекомендаций",
+      "description": "Система персонализированных рекомендаций использующая collaborative filtering, content-based методы и глубокое обучение для предсказания предпочтений пользователей.",
+      "technologies": ["Python", "TensorFlow", "Apache Spark", "Elasticsearch", "Apache Kafka", "MongoDB"],
+      "features": [
+        "Гибридные алгоритмы рекомендаций",
+        "Real-time персонализация",
+        "A/B тестирование рекомендаций",
+        "Масштабируемая архитектура"
+      ],
+      "github": "https://github.com/example/recommendation-engine",
+      "demo": null,
+      "image": "/images/recommendations-preview.jpg",
+      "featured": false,
+      "status": "completed",
+      "startDate": "2023-03-15",
+      "endDate": "2023-07-20"
+    },
+    {
+      "id": 6,
+      "title": "Voice Assistant Integration",
+      "subtitle": "Интеграция голосового помощника",
+      "description": "Разработка голосового интерфейса для корпоративной системы с поддержкой распознавания речи, обработки естественного языка и синтеза речи.",
+      "technologies": ["Python", "SpeechRecognition", "NLTK", "Azure Cognitive Services", "WebRTC", "Socket.io"],
+      "features": [
+        "Распознавание речи в реальном времени",
+        "Обработка естественного языка",
+        "Мультиязычная поддержка",
+        "Интеграция с существующими системами"
+      ],
+      "github": "https://github.com/example/voice-assistant",
+      "demo": null,
+      "image": "/images/voice-assistant-preview.jpg",
+      "featured": false,
+      "status": "planning",
+      "startDate": null,
+      "endDate": null
+    }
+  ],
+  "categories": [
+    "AI & Machine Learning",
+    "Data Analytics", 
+    "Web Development",
+    "Automation",
+    "Natural Language Processing"
+  ],
+  "technologies": [
+    "Python",
+    "JavaScript",
+    "React", 
+    "Node.js",
+    "TensorFlow",
+    "PyTorch",
+    "LangChain",
+    "OpenAI API",
+    "Docker",
+    "Kubernetes",
+    "PostgreSQL",
+    "MongoDB",
+    "Redis",
+    "Elasticsearch"
+  ]
+}

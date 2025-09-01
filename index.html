@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI-специалист и разработчик интеллектуальных решений. Интерактивное резюме с RAG-чатом для вопросов об опыте и экспертизе.">
+    <meta name="keywords" content="AI, Machine Learning, RAG, ChatBot, Frontend, Backend, JavaScript, Python">
+    <meta name="author" content="AI Specialist">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="AI-специалист - Интерактивное резюме">
+    <meta property="og:description" content="Узнайте об опыте в области искусственного интеллекта через интерактивный RAG-чат">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ai-resume.vercel.app">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI-специалист - Интерактивное резюме">
+    <meta name="twitter:description" content="Интерактивное резюме с RAG-чатом">
+    
+    <title>AI-специалист | Интерактивное резюме с RAG-чатом</title>
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://unpkg.com">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Design System CSS -->
+    <link rel="stylesheet" href="css/design-system.css">
+    <link rel="stylesheet" href="css/components-specific.css">
+    <link rel="stylesheet" href="css/specialized-components.css">
+    
+    <!-- Project CSS Files -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/animations.css">
+    
+    <!-- AOS (Animate On Scroll) CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    
+    <!-- Chart.js for data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.min.js" defer></script>
+    
+    <!-- AOS JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js" defer></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
+    
+    <!-- Main JavaScript -->
+    <script src="js/main.js" defer></script>
+</head>
+<body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="sr-only">Перейти к основному содержанию</a>
+    
+    <!-- Navigation -->
+    <nav class="nav-container" role="navigation" aria-label="Главная навигация">
+        <div class="container">
+            <div class="nav-content">
+                <a href="#" class="nav-logo" aria-label="Главная страница">
+                    <span class="nav-logo-icon">🤖</span>
+                    <span class="nav-logo-text">AI Specialist</span>
+                </a>
+                
+                <ul class="nav-menu" role="menubar">
+                    <li role="none">
+                        <a href="#hero" class="nav-link active" role="menuitem">Главная</a>
+                    </li>
+                    <li role="none">
+                        <a href="#about" class="nav-link" role="menuitem">О себе</a>
+                    </li>
+                    <li role="none">
+                        <a href="#projects" class="nav-link" role="menuitem">Проекты</a>
+                    </li>
+                    <li role="none">
+                        <a href="#skills" class="nav-link" role="menuitem">Навыки</a>
+                    </li>
+                    <li role="none">
+                        <a href="#chat" class="nav-link" role="menuitem">RAG Чат</a>
+                    </li>
+                    <li role="none">
+                        <a href="#contact" class="nav-link" role="menuitem">Контакты</a>
+                    </li>
+                </ul>
+                
+                <!-- Mobile menu toggle -->
+                <button class="nav-toggle" aria-label="Открыть мобильное меню" aria-expanded="false">
+                    <span class="nav-toggle-line"></span>
+                    <span class="nav-toggle-line"></span>
+                    <span class="nav-toggle-line"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section" aria-labelledby="hero-title">
+            <div class="hero-background" aria-hidden="true"></div>
+            <div class="container">
+                <div class="hero-content" data-aos="fade-up" data-aos-duration="800">
+                    <div class="hero-avatar" data-aos="zoom-in" data-aos-delay="200">
+                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><circle cx='100' cy='100' r='90' fill='%23374151'/><text x='100' y='120' text-anchor='middle' font-size='80' fill='white'>AI</text></svg>" 
+                             alt="AI Specialist Avatar" 
+                             width="150" 
+                             height="150">
+                    </div>
+                    
+                    <h1 id="hero-title" class="hero-title" data-aos="fade-up" data-aos-delay="400">
+                        <span class="hero-animated-text">AI-специалист</span><br>
+                        <span class="text-h2" style="color: var(--dark-300);">и разработчик интеллектуальных решений</span>
+                    </h1>
+                    
+                    <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="600">
+                        Создаю современные AI-решения с использованием LLM, RAG архитектуры и передовых технологий машинного обучения. Опыт в разработке чат-ботов, аналитических систем и интеграции ИИ в бизнес-процессы.
+                    </p>
+                    
+                    <div class="hero-actions" data-aos="fade-up" data-aos-delay="800">
+                        <a href="#chat" class="btn btn-primary btn-lg">
+                            <i data-lucide="message-circle" class="btn-icon"></i>
+                            Задать вопрос AI
+                        </a>
+                        <a href="#projects" class="btn btn-outline btn-lg">
+                            <i data-lucide="folder" class="btn-icon"></i>
+                            Мои проекты
+                        </a>
+                    </div>
+                    
+                    <div class="hero-stats" data-aos="fade-up" data-aos-delay="1000">
+                        <div class="hero-stat">
+                            <span class="hero-stat-value">15+</span>
+                            <span class="hero-stat-label">AI проектов</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-value">50K+</span>
+                            <span class="hero-stat-label">строк кода</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-value">3+</span>
+                            <span class="hero-stat-label">года опыта</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Floating elements -->
+            <div class="hero-floating" data-aos="fade" data-aos-delay="1200" aria-hidden="true">
+                <i data-lucide="brain" style="color: var(--primary-400); font-size: 2rem;"></i>
+            </div>
+            <div class="hero-floating" data-aos="fade" data-aos-delay="1400" aria-hidden="true">
+                <i data-lucide="cpu" style="color: var(--primary-500); font-size: 1.5rem;"></i>
+            </div>
+            <div class="hero-floating" data-aos="fade" data-aos-delay="1600" aria-hidden="true">
+                <i data-lucide="zap" style="color: var(--primary-300); font-size: 1.8rem;"></i>
+            </div>
+        </section>
+        
+        <!-- About Section -->
+        <section id="about" class="section" aria-labelledby="about-title">
+            <div class="container">
+                <div class="text-center" data-aos="fade-up">
+                    <h2 id="about-title" class="text-h2">О моей экспертизе</h2>
+                    <p class="text-body-lg" style="color: var(--dark-300); max-width: 600px; margin: 0 auto var(--space-12);">
+                        Специализируюсь на создании интеллектуальных систем, которые решают реальные бизнес-задачи
+                    </p>
+                </div>
+                
+                <!-- Multiagent Visualization will be inserted here -->
+                <div id="multiagent-container" data-aos="fade-up" data-aos-delay="200">
+                    <!-- JavaScript will render the visualization here -->
+                </div>
+                
+                <!-- AI Readiness Checklist will be inserted here -->
+                <div id="readiness-checklist" data-aos="fade-up" data-aos-delay="400">
+                    <!-- JavaScript will render the checklist here -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- Projects Section -->
+        <section id="projects" class="section" aria-labelledby="projects-title">
+            <div class="container">
+                <div class="text-center" data-aos="fade-up">
+                    <h2 id="projects-title" class="text-h2">Ключевые проекты</h2>
+                    <p class="text-body-lg" style="color: var(--dark-300); max-width: 600px; margin: 0 auto var(--space-12);">
+                        Избранные проекты, демонстрирующие опыт в области AI и машинного обучения
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 grid-cols-md-2 grid-cols-lg-3 gap-6">
+                    <!-- Project cards will be dynamically inserted here -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- Skills Section -->
+        <section id="skills" class="section" aria-labelledby="skills-title">
+            <div class="container">
+                <div class="text-center" data-aos="fade-up">
+                    <h2 id="skills-title" class="text-h2">Технические навыки</h2>
+                    <p class="text-body-lg" style="color: var(--dark-300); max-width: 600px; margin: 0 auto var(--space-12);">
+                        Современный стек технологий для создания AI-решений
+                    </p>
+                </div>
+                
+                <div id="skills-container" data-aos="fade-up" data-aos-delay="200">
+                    <!-- Skills visualization will be inserted here -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- RAG Chat Section -->
+        <section id="chat" class="section" aria-labelledby="chat-title">
+            <div class="container">
+                <div class="text-center" data-aos="fade-up">
+                    <h2 id="chat-title" class="text-h2">Интерактивный RAG-чат</h2>
+                    <p class="text-body-lg" style="color: var(--dark-300); max-width: 600px; margin: 0 auto var(--space-12);">
+                        Задайте любой вопрос о моем опыте, проектах или экспертизе в области ИИ
+                    </p>
+                </div>
+                
+                <div class="chat-container" data-aos="fade-up" data-aos-delay="200">
+                    <div class="chat-header">
+                        <h3 class="chat-title">
+                            <i data-lucide="bot" style="width: 1.25em; height: 1.25em;"></i>
+                            AI Ассистент
+                        </h3>
+                        <div class="chat-status">
+                            <div class="chat-status-indicator"></div>
+                            <span>Онлайн</span>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-messages custom-scrollbar" id="chat-messages">
+                        <div class="chat-message">
+                            <div class="chat-message-avatar">AI</div>
+                            <div class="chat-message-content">
+                                <p>Привет! Я AI-ассистент, который знает все о профессиональном опыте и проектах. Задайте любой вопрос!</p>
+                                <div class="chat-message-time">Сейчас</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-suggestions" id="chat-suggestions">
+                        <button class="chat-suggestion" data-question="Расскажи о твоем опыте с LLM">
+                            Опыт с LLM
+                        </button>
+                        <button class="chat-suggestion" data-question="Какие проекты с RAG ты делал?">
+                            RAG проекты
+                        </button>
+                        <button class="chat-suggestion" data-question="Твой технический стек">
+                            Технический стек
+                        </button>
+                    </div>
+                    
+                    <div class="chat-input-container">
+                        <textarea 
+                            class="chat-input" 
+                            id="chat-input"
+                            placeholder="Напишите ваш вопрос..."
+                            rows="1"
+                            aria-label="Поле ввода сообщения чата"></textarea>
+                        <button class="chat-send-btn" id="chat-send-btn" aria-label="Отправить сообщение">
+                            <i data-lucide="send" style="width: 1.25em; height: 1.25em;"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Section -->
+        <section id="contact" class="section" aria-labelledby="contact-title">
+            <div class="container">
+                <div class="text-center" data-aos="fade-up">
+                    <h2 id="contact-title" class="text-h2">Свяжитесь со мной</h2>
+                    <p class="text-body-lg" style="color: var(--dark-300); max-width: 600px; margin: 0 auto var(--space-12);">
+                        Готов обсудить AI-проекты и возможности сотрудничества
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 grid-cols-md-2 gap-8">
+                    <div class="contact-info" data-aos="fade-right">
+                        <div class="card">
+                            <h3 class="card-title">Контактная информация</h3>
+                            <div class="contact-items">
+                                <div class="contact-item">
+                                    <i data-lucide="mail" class="contact-icon"></i>
+                                    <span>ai.specialist@example.com</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i data-lucide="linkedin" class="contact-icon"></i>
+                                    <span>linkedin.com/in/ai-specialist</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i data-lucide="github" class="contact-icon"></i>
+                                    <span>github.com/ai-specialist</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i data-lucide="phone" class="contact-icon"></i>
+                                    <span>+7 (000) 000-00-00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form-container" data-aos="fade-left">
+                        <form class="contact-form" id="contact-form">
+                            <div class="form-group">
+                                <label class="form-label" for="contact-name">Имя</label>
+                                <input class="form-input" type="text" id="contact-name" name="name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="contact-email">Email</label>
+                                <input class="form-input" type="email" id="contact-email" name="email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="contact-message">Сообщение</label>
+                                <textarea class="form-input form-textarea" id="contact-message" name="message" rows="4" required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">
+                                <i data-lucide="send" class="btn-icon"></i>
+                                Отправить сообщение
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <p class="text-body-sm" style="color: var(--dark-400);">
+                        © 2025 AI Specialist. Интерактивное резюме с RAG-технологией.
+                    </p>
+                </div>
+                <div class="footer-links">
+                    <a href="#privacy" class="footer-link">Конфиденциальность</a>
+                    <a href="#terms" class="footer-link">Условия</a>
+                    <a href="#accessibility" class="footer-link">Доступность</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Loading indicator -->
+    <div id="loading-indicator" class="loading-indicator hidden">
+        <div class="loading-spinner"></div>
+        <span>Загрузка...</span>
+    </div>
+    
+    <!-- Error notification -->
+    <div id="error-notification" class="error-notification hidden" role="alert" aria-live="assertive">
+        <div class="error-content">
+            <i data-lucide="alert-circle" class="error-icon"></i>
+            <span class="error-message"></span>
+            <button class="error-close" aria-label="Закрыть уведомление">
+                <i data-lucide="x"></i>
+            </button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,266 @@
+{
+  "skillCategories": [
+    {
+      "id": "ai-ml",
+      "category": "AI & Machine Learning",
+      "icon": "brain",
+      "description": "Разработка интеллектуальных систем и моделей машинного обучения",
+      "skills": [
+        {
+          "name": "Python",
+          "level": "Эксперт",
+          "progress": 95,
+          "years": 4,
+          "description": "Основной язык для ML и AI разработки"
+        },
+        {
+          "name": "LangChain", 
+          "level": "Продвинутый",
+          "progress": 88,
+          "years": 2,
+          "description": "Создание LLM приложений и RAG систем"
+        },
+        {
+          "name": "OpenAI API",
+          "level": "Продвинутый", 
+          "progress": 92,
+          "years": 2,
+          "description": "Интеграция GPT моделей в приложения"
+        },
+        {
+          "name": "TensorFlow/Keras",
+          "level": "Продвинутый",
+          "progress": 82,
+          "years": 3,
+          "description": "Создание и обучение нейронных сетей"
+        },
+        {
+          "name": "PyTorch",
+          "level": "Средний",
+          "progress": 75,
+          "years": 2,
+          "description": "Исследования и эксперименты в ML"
+        },
+        {
+          "name": "Hugging Face Transformers",
+          "level": "Продвинутый",
+          "progress": 85,
+          "years": 2,
+          "description": "Работа с pre-trained языковыми моделями"
+        }
+      ]
+    },
+    {
+      "id": "backend",
+      "category": "Backend Development",
+      "icon": "server",
+      "description": "Разработка серверной логики и API",
+      "skills": [
+        {
+          "name": "FastAPI",
+          "level": "Эксперт",
+          "progress": 93,
+          "years": 3,
+          "description": "Создание высокопроизводительных API"
+        },
+        {
+          "name": "Node.js",
+          "level": "Продвинутый",
+          "progress": 85,
+          "years": 3,
+          "description": "JavaScript серверная разработка"
+        },
+        {
+          "name": "PostgreSQL",
+          "level": "Продвинутый",
+          "progress": 88,
+          "years": 4,
+          "description": "Реляционные базы данных и SQL"
+        },
+        {
+          "name": "MongoDB",
+          "level": "Средний",
+          "progress": 72,
+          "years": 2,
+          "description": "NoSQL документо-ориентированные БД"
+        },
+        {
+          "name": "Redis",
+          "level": "Продвинутый",
+          "progress": 80,
+          "years": 2,
+          "description": "Кеширование и очереди сообщений"
+        },
+        {
+          "name": "Docker",
+          "level": "Продвинутый",
+          "progress": 87,
+          "years": 3,
+          "description": "Контейнеризация приложений"
+        }
+      ]
+    },
+    {
+      "id": "frontend",
+      "category": "Frontend Development", 
+      "icon": "code",
+      "description": "Создание пользовательских интерфейсов",
+      "skills": [
+        {
+          "name": "JavaScript/ES6+",
+          "level": "Эксперт",
+          "progress": 92,
+          "years": 5,
+          "description": "Современный JavaScript и веб-стандарты"
+        },
+        {
+          "name": "React",
+          "level": "Продвинутый",
+          "progress": 88,
+          "years": 3,
+          "description": "Создание интерактивных пользовательских интерфейсов"
+        },
+        {
+          "name": "Vue.js",
+          "level": "Средний",
+          "progress": 70,
+          "years": 1,
+          "description": "Прогрессивный JavaScript фреймворк"
+        },
+        {
+          "name": "CSS/SCSS",
+          "level": "Продвинутый",
+          "progress": 89,
+          "years": 4,
+          "description": "Стилизация и адаптивный дизайн"
+        },
+        {
+          "name": "TypeScript",
+          "level": "Продвинутый",
+          "progress": 83,
+          "years": 2,
+          "description": "Типизированный JavaScript для больших проектов"
+        },
+        {
+          "name": "D3.js",
+          "level": "Средний",
+          "progress": 65,
+          "years": 1,
+          "description": "Создание интерактивных визуализаций данных"
+        }
+      ]
+    },
+    {
+      "id": "devops",
+      "category": "DevOps & Cloud",
+      "icon": "cloud",
+      "description": "Автоматизация развертывания и облачные технологии",
+      "skills": [
+        {
+          "name": "GitHub Actions",
+          "level": "Продвинутый", 
+          "progress": 85,
+          "years": 2,
+          "description": "CI/CD автоматизация и деплойменты"
+        },
+        {
+          "name": "Vercel",
+          "level": "Продвинутый",
+          "progress": 88,
+          "years": 2,
+          "description": "Serverless функции и фронтенд хостинг"
+        },
+        {
+          "name": "AWS",
+          "level": "Средний",
+          "progress": 68,
+          "years": 1,
+          "description": "Облачные сервисы Amazon"
+        },
+        {
+          "name": "Kubernetes",
+          "level": "Начальный",
+          "progress": 45,
+          "years": 0.5,
+          "description": "Оркестрация контейнеров"
+        },
+        {
+          "name": "Nginx",
+          "level": "Средний",
+          "progress": 72,
+          "years": 2,
+          "description": "Веб-сервер и reverse proxy"
+        }
+      ]
+    },
+    {
+      "id": "data",
+      "category": "Data Science & Analytics",
+      "icon": "bar-chart",
+      "description": "Анализ данных и машинное обучение",
+      "skills": [
+        {
+          "name": "Pandas",
+          "level": "Эксперт",
+          "progress": 94,
+          "years": 4,
+          "description": "Обработка и анализ структурированных данных"
+        },
+        {
+          "name": "NumPy",
+          "level": "Эксперт", 
+          "progress": 91,
+          "years": 4,
+          "description": "Вычисления с многомерными массивами"
+        },
+        {
+          "name": "Matplotlib/Seaborn",
+          "level": "Продвинутый",
+          "progress": 87,
+          "years": 3,
+          "description": "Визуализация данных и статистических графиков"
+        },
+        {
+          "name": "Scikit-learn",
+          "level": "Продвинутый",
+          "progress": 89,
+          "years": 3,
+          "description": "Классические алгоритмы машинного обучения"
+        },
+        {
+          "name": "Jupyter/Colab",
+          "level": "Эксперт",
+          "progress": 93,
+          "years": 4,
+          "description": "Интерактивная разработка и исследования"
+        },
+        {
+          "name": "SQL",
+          "level": "Продвинутый",
+          "progress": 86,
+          "years": 4,
+          "description": "Запросы к базам данных и аналитика"
+        }
+      ]
+    }
+  ],
+  "certifications": [
+    {
+      "name": "AWS Certified Cloud Practitioner",
+      "issuer": "Amazon Web Services",
+      "date": "2023-08-15",
+      "credentialId": "AWS-123456789"
+    },
+    {
+      "name": "TensorFlow Developer Certificate",
+      "issuer": "Google",
+      "date": "2023-03-20", 
+      "credentialId": "TF-987654321"
+    }
+  ],
+  "totalYearsExperience": 4,
+  "primaryLanguages": ["Python", "JavaScript"],
+  "frameworks": ["FastAPI", "React", "LangChain", "TensorFlow"],
+  "databases": ["PostgreSQL", "MongoDB", "Redis"],
+  "tools": ["Docker", "Git", "Jupyter", "VS Code", "Postman"]
+}
