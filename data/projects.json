@@ -139,7 +139,7 @@
         "Автономная координация"
       ],
       "github": "https://github.com/aironlab/multiagent-team",
-      "demo": "https://multiagent-demo.aironlab.ru",
+      "demo": null,
       "image": "/images/multiagent-preview.jpg",
       "featured": true,
       "status": "in_progress",
