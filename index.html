@@ -516,15 +516,50 @@
                         </div>
                     </div>
                     
+                    <!-- Chat States -->
+                    <div class="chat-empty-state" id="chat-empty-state" style="display: none;">
+                        <div class="chat-empty-icon">
+                            <i data-lucide="message-circle" style="width: 3rem; height: 3rem; opacity: 0.5;"></i>
+                        </div>
+                        <h3 class="chat-empty-title">Начните диалог</h3>
+                        <p class="chat-empty-description">Выберите один из предложенных вопросов или напишите свой</p>
+                    </div>
+                    
+                    <div class="chat-loading-state" id="chat-loading-state" style="display: none;">
+                        <div class="chat-loading-spinner">
+                            <div class="chat-spinner"></div>
+                        </div>
+                        <p class="chat-loading-text">Инициализация AI-ассистента...</p>
+                    </div>
+                    
+                    <div class="chat-error-state" id="chat-error-state" style="display: none;">
+                        <div class="chat-error-icon">
+                            <i data-lucide="alert-circle" style="width: 2.5rem; height: 2.5rem; color: var(--error);"></i>
+                        </div>
+                        <h3 class="chat-error-title">Ошибка подключения</h3>
+                        <p class="chat-error-description">Не удалось связаться с AI-ассистентом. Попробуйте обновить страницу.</p>
+                        <button class="chat-retry-btn" id="chat-retry-btn">
+                            <i data-lucide="refresh-cw" style="width: 1em; height: 1em;"></i>
+                            Попробовать снова
+                        </button>
+                    </div>
+                    
                     <div class="chat-suggestions" id="chat-suggestions">
-                        <button class="chat-suggestion" data-question="Расскажи о твоем опыте с LLM">
+                        <button class="chat-suggestion" data-question="Расскажи о твоем опыте с LLM и промпт-инжинирингом">
+                            <i data-lucide="brain" style="width: 1em; height: 1em;"></i>
                             Опыт с LLM
                         </button>
-                        <button class="chat-suggestion" data-question="Какие проекты с RAG ты делал?">
+                        <button class="chat-suggestion" data-question="Какие проекты с RAG-системами ты реализовал?">
+                            <i data-lucide="search" style="width: 1em; height: 1em;"></i>
                             RAG проекты
                         </button>
-                        <button class="chat-suggestion" data-question="Твой технический стек">
+                        <button class="chat-suggestion" data-question="Какой у тебя технический стек для ИИ разработки?">
+                            <i data-lucide="layers" style="width: 1em; height: 1em;"></i>
                             Технический стек
+                        </button>
+                        <button class="chat-suggestion" data-question="Как работает мультиагентная команда из 7 ИИ-агентов?">
+                            <i data-lucide="users" style="width: 1em; height: 1em;"></i>
+                            Мультиагентные системы
                         </button>
                     </div>
                     

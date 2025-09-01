@@ -498,9 +498,9 @@ class RAGChatComponent {
         this.showTypingIndicator();
 
         try {
-            const response = await this.generateResponse(message);
+            const responseData = await this.generateResponseWithSources(message);
             this.hideTypingIndicator();
-            this.addMessage(response, 'assistant');
+            this.addMessage(responseData.text, 'assistant', responseData.sources);
         } catch (error) {
             this.hideTypingIndicator();
             this.addMessage('Извините, произошла ошибка. Попробуйте еще раз.', 'assistant');
@@ -541,6 +541,75 @@ class RAGChatComponent {
         return fallbackResponses[Math.floor(Math.random() * fallbackResponses.length)];
     }
 
+    async generateResponseWithSources(message) {
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        
+        const lowerMessage = message.toLowerCase();
+        let responseText = '';
+        let sources = [];
+
+        // Проверяем вопросы о LLM и промпт-инжиниринге
+        if (lowerMessage.includes('llm') || lowerMessage.includes('промпт') || lowerMessage.includes('модел')) {
+            responseText = "Мой опыт с LLM включает работу с Mistral API, создание RAG-систем и промпт-инжиниринг. Я руковожу командой из 7 ИИ-агентов, что ускоряет разработку в 5 раз. Специализируюсь на интеграции LLM в бизнес-процессы и создании мультиагентных архитектур.";
+            sources = [
+                { title: "Prompt Engineer & LLM Architect", type: "experience", relevance: 95, url: "#experience" },
+                { title: "Mistral API Integration", type: "technology", relevance: 90, url: "#tech-stack" },
+                { title: "Мультиагентная команда (7 ИИ-агентов)", type: "achievement", relevance: 88, url: "#projects" }
+            ];
+        }
+        // Проверяем вопросы о RAG-системах
+        else if (lowerMessage.includes('rag') || lowerMessage.includes('поиск') || lowerMessage.includes('вектор')) {
+            responseText = "У меня есть глубокий опыт создания RAG-систем. Реализовал проекты: RAG для бухгалтерской компании, нейро-юриста с автоматизацией консультаций на 95%, и MCP Server для YClients. Использую векторные базы данных и advanced search для максимальной точности ответов.";
+            sources = [
+                { title: "RAG для бизнеса (бухгалтерская компания)", type: "project", relevance: 92, url: "#projects" },
+                { title: "Нейро-Юрист (95% автоматизации)", type: "project", relevance: 90, url: "#projects" },
+                { title: "MCP Server для YClients", type: "project", relevance: 88, url: "#projects" },
+                { title: "Vector Database", type: "technology", relevance: 85, url: "#tech-stack" }
+            ];
+        }
+        // Проверяем вопросы о техническом стеке
+        else if (lowerMessage.includes('стек') || lowerMessage.includes('технолог') || lowerMessage.includes('инструмент')) {
+            responseText = "Мой технический стек для ИИ-разработки: Mistral API для LLM, LangChain для RAG-архитектур, Vector Databases для семантического поиска, Docker для деплоя, и n8n для автоматизации. Также использую Claude API, Telegram Bot API и современные фреймворки для создания мультиагентных систем.";
+            sources = [
+                { title: "AI & LLM Frameworks", type: "technology", relevance: 95, url: "#tech-stack" },
+                { title: "Vector & Data Tools", type: "technology", relevance: 90, url: "#tech-stack" },
+                { title: "Development Stack", type: "technology", relevance: 88, url: "#tech-stack" },
+                { title: "Integration & APIs", type: "technology", relevance: 85, url: "#tech-stack" }
+            ];
+        }
+        // Проверяем вопросы о мультиагентных системах
+        else if (lowerMessage.includes('мультиагент') || lowerMessage.includes('команд') || lowerMessage.includes('агент')) {
+            responseText = "Создал уникальную мультиагентную систему из 7 специализированных ИИ-агентов: дизайнер, фронтенд-разработчик, бэкенд-разработчик, DevOps, QA-тестер, проект-менеджер и продакт-менеджер. Каждый агент имеет свою экспертизу и автономно выполняет задачи, что ускоряет разработку в 5 раз.";
+            sources = [
+                { title: "Multiagent Development Team", type: "project", relevance: 95, url: "#projects" },
+                { title: "7 специализированных ИИ-агентов", type: "achievement", relevance: 92, url: "#about" },
+                { title: "Ускорение разработки в 5 раз", type: "achievement", relevance: 88, url: "#about" }
+            ];
+        }
+        // Вопросы о проектах
+        else if (lowerMessage.includes('проект') || lowerMessage.includes('портфолио') || lowerMessage.includes('работ')) {
+            responseText = "В моем портфолио 5 ключевых проектов: Face-Swap Bot (10K+ строк кода, viral инструмент), RAG для бизнеса (полная автоматизация), Нейро-Юрист (95% автоматизации консультаций), MCP Server (24/7 нейро-администратор), и Мультиагентная команда разработки. Все проекты демонстрируют практическое применение ИИ в бизнесе.";
+            sources = [
+                { title: "Face-Swap Bot для \"Новые Люди\"", type: "project", relevance: 90, url: "#projects" },
+                { title: "RAG для бизнеса", type: "project", relevance: 88, url: "#projects" },
+                { title: "Нейро-Юрист", type: "project", relevance: 86, url: "#projects" },
+                { title: "MCP Server", type: "project", relevance: 84, url: "#projects" },
+                { title: "Multiagent Development Team", type: "project", relevance: 82, url: "#projects" }
+            ];
+        }
+        // Дефолтный ответ
+        else {
+            responseText = "Спасибо за вопрос! Я специализируюсь на промпт-инжиниринге, создании RAG-систем и мультиагентных архитектур. Руковожу командой из 7 ИИ-агентов и имею опыт реализации сложных ИИ-проектов для бизнеса. Задайте более конкретный вопрос о моем опыте!";
+            sources = [
+                { title: "Обо мне - Экспертиза", type: "experience", relevance: 85, url: "#about" },
+                { title: "Технологический стек", type: "technology", relevance: 80, url: "#tech-stack" },
+                { title: "Портфолио проектов", type: "project", relevance: 75, url: "#projects" }
+            ];
+        }
+
+        return { text: responseText, sources: sources };
+    }
+
     searchKnowledgeBase(query) {
         if (!this.knowledgeBase?.documents) return null;
 
@@ -562,22 +631,72 @@ class RAGChatComponent {
         return null;
     }
 
-    addMessage(content, sender) {
+    addMessage(content, sender, sources = null) {
         if (!this.chatMessages) return;
 
         const messageEl = document.createElement('div');
-        messageEl.className = `chat-message chat-message-enter ${sender === 'user' ? 'user' : ''}`;
+        messageEl.className = `chat-message chat-message-enter ${sender === 'user' ? 'user' : 'assistant'}`;
+        
+        let sourcesHtml = '';
+        if (sources && sources.length > 0) {
+            sourcesHtml = `
+                <div class="chat-sources">
+                    <div class="chat-sources-header">
+                        <i data-lucide="file-text" style="width: 16px; height: 16px;"></i>
+                        Источники информации
+                    </div>
+                    <div class="chat-sources-list">
+                        ${sources.map(source => `
+                            <div class="chat-source-item" onclick="window.open('${source.url || '#'}', '_blank')">
+                                <div class="chat-source-icon">
+                                    <i data-lucide="${this.getSourceIcon(source.type)}" style="width: 16px; height: 16px;"></i>
+                                </div>
+                                <div class="chat-source-content">
+                                    <div class="chat-source-title">${source.title}</div>
+                                    <div class="chat-source-type">${source.type}</div>
+                                </div>
+                                <div class="chat-source-relevance">
+                                    <div class="chat-relevance-bar">
+                                        <div class="chat-relevance-fill" style="width: ${source.relevance || 85}%"></div>
+                                    </div>
+                                    <span>${source.relevance || 85}%</span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
         
         messageEl.innerHTML = `
             <div class="chat-message-avatar">${sender === 'user' ? 'Вы' : 'AI'}</div>
             <div class="chat-message-content">
                 <p>${content}</p>
                 <div class="chat-message-time">${new Date().toLocaleTimeString()}</div>
+                ${sourcesHtml}
             </div>
         `;
 
         this.chatMessages.appendChild(messageEl);
         this.chatMessages.scrollTop = this.chatMessages.scrollHeight;
+        
+        // Инициализируем Lucide иконки для новых элементов
+        if (window.lucide) {
+            window.lucide.createIcons();
+        }
+    }
+
+    getSourceIcon(type) {
+        const icons = {
+            'project': 'folder',
+            'experience': 'briefcase',
+            'skill': 'star',
+            'technology': 'cpu',
+            'achievement': 'trophy',
+            'education': 'graduation-cap',
+            'default': 'file-text'
+        };
+        return icons[type] || icons.default;
     }
 
     showTypingIndicator() {
