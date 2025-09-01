@@ -643,17 +643,17 @@ class ProjectsManager {
             return;
         }
 
-        if (!this.projects.length) {
+        if (!this.projects || !this.projects.length) {
             console.warn('⚠️ Нет проектов для отображения, загружаем demo данные...');
             this.loadDemoProjects();
             return;
         }
 
-        console.log('🎬 Начинаем рендеринг', this.projects.length, 'проектов');
+        console.log('🎬 Начинаем рендеринг', this.projects?.length || 0, 'проектов');
 
         // Показываем только топ 3 проекта изначально
-        const featuredProjects = this.projects.filter(p => p.featured).slice(0, 3);
-        const projectsToShow = featuredProjects.length > 0 ? featuredProjects : this.projects.slice(0, 3);
+        const featuredProjects = (this.projects || []).filter(p => p?.featured).slice(0, 3);
+        const projectsToShow = featuredProjects.length > 0 ? featuredProjects : (this.projects || []).slice(0, 3);
 
         this.container.innerHTML = projectsToShow.map((project, index) => {
             const projectType = this.getProjectType(project);
@@ -1308,7 +1308,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('🔄 Принудительная проверка рендеринга проектов...');
         if (window.webResumeApp && window.webResumeApp.components.projectsManager) {
             const projectsManager = window.webResumeApp.components.projectsManager;
-            if (!projectsManager.projects.length) {
+            if (!projectsManager.projects || !projectsManager.projects.length) {
                 console.log('🔧 Принудительная загрузка demo проектов...');
                 projectsManager.loadDemoProjects();
             } else {
