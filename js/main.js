@@ -630,49 +630,61 @@ class ProjectsManager {
         const featuredProjects = this.projects.filter(p => p.featured).slice(0, 3);
         const projectsToShow = featuredProjects.length > 0 ? featuredProjects : this.projects.slice(0, 3);
 
-        this.container.innerHTML = projectsToShow.map(project => `
-            <div class="project-card" data-aos="fade-up" data-project-id="${project.id}">
-                <div class="project-header">
-                    <div>
-                        <h3 class="project-title">${project.title}</h3>
-                        <p class="project-subtitle">${project.subtitle}</p>
+        this.container.innerHTML = projectsToShow.map((project, index) => {
+            const projectType = this.getProjectType(project);
+            const glowClass = this.getGlowClass(projectType);
+            const gradientClass = this.getGradientClass(projectType);
+            const iconName = this.getProjectIcon(projectType);
+            
+            return `
+                <div class="project-card-interactive" data-aos="fade-up" data-aos-delay="${100 + index * 100}" data-project-id="${project.id}" data-project-type="${projectType}">
+                    <div class="project-glow-effect ${glowClass}"></div>
+                    
+                    ${project.featured ? '<div class="project-featured-badge">Featured</div>' : ''}
+                    
+                    <div class="project-icon-container ${gradientClass}">
+                        <i data-lucide="${iconName}"></i>
+                        <div class="project-icon-pulse"></div>
                     </div>
-                    ${project.featured ? '<span class="project-status featured">Featured</span>' : ''}
-                </div>
-                
-                <p class="project-description">${project.description}</p>
-                
-                <div class="project-technologies">
-                    ${project.technologies.map(tech => 
-                        `<span class="project-tech-tag">${tech}</span>`
-                    ).join('')}
-                </div>
-                
-                <div class="project-metrics">
-                    ${project.metrics.slice(0, 2).map(metric => `
-                        <div class="project-metric">
-                            <span class="project-metric-value">${metric.split(' ')[0]}</span>
-                            <span class="project-metric-label">${metric.split(' ').slice(1).join(' ')}</span>
+                    
+                    <div class="project-content-interactive">
+                        <h3 class="project-title-interactive">${project.title}</h3>
+                        <p class="project-subtitle-interactive">${project.subtitle}</p>
+                        <p class="project-description-interactive">${project.description}</p>
+                        
+                        <div class="project-metrics-interactive">
+                            ${project.metrics.slice(0, 2).map(metric => `
+                                <div class="project-metric-interactive">
+                                    <span class="project-metric-value">${metric.split(' ')[0]}</span>
+                                    <span class="project-metric-label">${metric.split(' ').slice(1).join(' ')}</span>
+                                </div>
+                            `).join('')}
                         </div>
-                    `).join('')}
+                        
+                        <div class="project-tech-tags-interactive">
+                            ${project.technologies.slice(0, 4).map((tech, techIndex) => {
+                                const techClass = this.getTechPillClass(tech, techIndex);
+                                return `<span class="project-tech-pill ${techClass}">${tech}</span>`;
+                            }).join('')}
+                        </div>
+                        
+                        <div class="project-actions-interactive">
+                            <button class="project-btn-interactive primary" onclick="openProjectModal(${project.id})">
+                                <i data-lucide="info" style="width: 16px; height: 16px;"></i>
+                                Подробнее
+                            </button>
+                            
+                            ${project.demo ? `
+                                <a href="${project.demo}" class="project-btn-interactive secondary" target="_blank" rel="noopener noreferrer">
+                                    <i data-lucide="external-link" style="width: 16px; height: 16px;"></i>
+                                    Демо
+                                </a>
+                            ` : ''}
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="project-actions">
-                    <button class="project-btn project-btn-primary" onclick="openProjectModal(${project.id})">
-                        <i data-lucide="info" style="width: 16px; height: 16px;"></i>
-                        Подробнее
-                    </button>
-                    ${project.github ? `<a href="${project.github}" class="project-btn project-btn-outline" target="_blank">
-                        <i data-lucide="github" style="width: 16px; height: 16px;"></i>
-                        GitHub
-                    </a>` : ''}
-                    ${project.demo ? `<a href="${project.demo}" class="project-btn project-btn-outline" target="_blank">
-                        <i data-lucide="external-link" style="width: 16px; height: 16px;"></i>
-                        Demo
-                    </a>` : ''}
-                </div>
-            </div>
-        `).join('');
+            `;
+        }).join('');
 
         // Инициализируем иконки Lucide
         if (typeof lucide !== 'undefined') {
@@ -682,12 +694,85 @@ class ProjectsManager {
         this.setupProjectInteractions();
     }
 
+    getProjectType(project) {
+        const title = project.title.toLowerCase();
+        if (title.includes('bot') || title.includes('telegram')) return 'bot';
+        if (title.includes('ai') || title.includes('llm') || title.includes('нейро')) return 'ai';
+        if (title.includes('mcp') || title.includes('server') || title.includes('integration')) return 'integration';
+        if (title.includes('rag') || title.includes('автоматизация')) return 'automation';
+        return 'development';
+    }
+
+    getGlowClass(projectType) {
+        const glowMap = {
+            'bot': 'project-bot-glow',
+            'ai': 'project-ai-glow',
+            'integration': 'project-integration-glow',
+            'automation': 'project-automation-glow',
+            'development': 'project-development-glow'
+        };
+        return glowMap[projectType] || 'project-ai-glow';
+    }
+
+    getGradientClass(projectType) {
+        const gradientMap = {
+            'bot': 'project-bot-gradient',
+            'ai': 'project-ai-gradient',
+            'integration': 'project-integration-gradient',
+            'automation': 'project-automation-gradient',
+            'development': 'project-development-gradient'
+        };
+        return gradientMap[projectType] || 'project-ai-gradient';
+    }
+
+    getProjectIcon(projectType) {
+        const iconMap = {
+            'bot': 'message-circle',
+            'ai': 'brain',
+            'integration': 'plug',
+            'automation': 'zap',
+            'development': 'code'
+        };
+        return iconMap[projectType] || 'brain';
+    }
+
+    getTechPillClass(tech, index) {
+        const techLower = tech.toLowerCase();
+        
+        // AI/LLM технологии - синий
+        if (techLower.includes('ai') || techLower.includes('api') || techLower.includes('gpt') || 
+            techLower.includes('claude') || techLower.includes('mistral') || techLower.includes('openai') ||
+            techLower.includes('piapi')) {
+            return 'primary';
+        }
+        
+        // Базы данных и векторы - зеленый
+        if (techLower.includes('vector') || techLower.includes('database') || techLower.includes('pinecone') ||
+            techLower.includes('chroma') || techLower.includes('rag') || techLower.includes('langchain')) {
+            return 'secondary';
+        }
+        
+        // Integration и MCP - фиолетовый
+        if (techLower.includes('mcp') || techLower.includes('protocol') || techLower.includes('integration') ||
+            techLower.includes('webhook') || techLower.includes('битрикс') || techLower.includes('yclients')) {
+            return 'violet';
+        }
+        
+        // Bot технологии - розовый
+        if (techLower.includes('bot') || techLower.includes('telegram')) {
+            return 'rose';
+        }
+        
+        // Development - оранжевый (по умолчанию)
+        return 'accent';
+    }
+
     setupProjectInteractions() {
         // Обработчик для карточек проектов
-        document.querySelectorAll('.project-card').forEach(card => {
+        document.querySelectorAll('.project-card-interactive').forEach(card => {
             card.addEventListener('click', (e) => {
                 // Не открываем модал если кликнули по кнопке
-                if (e.target.closest('.project-btn') || e.target.closest('a')) return;
+                if (e.target.closest('.project-btn-interactive') || e.target.closest('a')) return;
                 
                 const projectId = parseInt(card.getAttribute('data-project-id'));
                 if (window.openProjectModal) {
@@ -1052,6 +1137,7 @@ class InteractiveEffects {
     }
 
     initMouseTrackingCards() {
+        // Mouse tracking для карточек экспертизы
         const expertiseCards = document.querySelectorAll('.expertise-card-compact');
         
         expertiseCards.forEach(card => {
@@ -1073,14 +1159,44 @@ class InteractiveEffects {
                 });
             }
         });
+
+        // Mouse tracking для карточек проектов
+        const projectCards = document.querySelectorAll('.project-card-interactive');
+        
+        projectCards.forEach(card => {
+            const cardGlow = card.querySelector('.project-glow-effect');
+            
+            if (cardGlow) {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    cardGlow.style.setProperty('--mouse-x', `${x}px`);
+                    cardGlow.style.setProperty('--mouse-y', `${y}px`);
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    cardGlow.style.removeProperty('--mouse-x');
+                    cardGlow.style.removeProperty('--mouse-y');
+                });
+            }
+        });
     }
 
     initPulseAnimations() {
-        // Добавляем случайную задержку для pulse анимаций
-        const pulseElements = document.querySelectorAll('.icon-pulse');
+        // Добавляем случайную задержку для pulse анимаций экспертизы
+        const expertisePulseElements = document.querySelectorAll('.icon-pulse');
         
-        pulseElements.forEach((element, index) => {
+        expertisePulseElements.forEach((element, index) => {
             element.style.animationDelay = `${index * 0.7}s`;
+        });
+
+        // Добавляем случайную задержку для pulse анимаций проектов
+        const projectPulseElements = document.querySelectorAll('.project-icon-pulse');
+        
+        projectPulseElements.forEach((element, index) => {
+            element.style.animationDelay = `${index * 1.2}s`;
         });
     }
 
