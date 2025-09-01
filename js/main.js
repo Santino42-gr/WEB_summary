@@ -1031,58 +1031,84 @@ function openProjectModal(projectId) {
     const modalBody = document.getElementById('modal-body');
 
     modalTitle.textContent = project.title;
+    
+    // Создаем изображение проекта на основе ID
+    const projectImages = {
+        1: 'https://via.placeholder.com/400x250/1a1a1a/3b82f6?text=Face-Swap+Bot',
+        2: 'https://via.placeholder.com/400x250/1a1a1a/10b981?text=Нейро-Юрист',
+        3: 'https://via.placeholder.com/400x250/1a1a1a/8b5cf6?text=MCP+Server',
+        4: 'https://via.placeholder.com/400x250/1a1a1a/f59e0b?text=Multiagent+Team',
+        5: 'https://via.placeholder.com/400x250/1a1a1a/ef4444?text=RAG+Системы'
+    };
+
     modalBody.innerHTML = `
         <div class="project-modal-content">
             <div class="project-modal-image">
-                <i data-lucide="image" style="font-size: 3rem; opacity: 0.3;"></i>
+                <img src="${projectImages[project.id]}" alt="${project.title}" style="width: 100%; height: 250px; object-fit: cover; border-radius: var(--radius-lg);">
                 <div style="position: absolute; bottom: 10px; right: 10px; background: var(--primary-500); color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px;">
                     ${project.subtitle}
                 </div>
             </div>
             
             <div>
-                <h4 style="color: var(--dark-50); margin-bottom: var(--space-3);">Описание проекта</h4>
+                <h4 style="color: var(--dark-50); margin-bottom: var(--space-3);">Подробное описание</h4>
                 <p style="color: var(--dark-300); line-height: 1.6; margin-bottom: var(--space-4);">
-                    ${project.description}
+                    ${project.detailedDescription || project.description}
                 </p>
-            </div>
-
-            <div>
-                <h4 style="color: var(--dark-50); margin-bottom: var(--space-3);">Ключевые особенности</h4>
-                <ul class="project-modal-features">
-                    ${project.features.map(feature => `<li>${feature}</li>`).join('')}
-                </ul>
             </div>
 
             <div>
                 <h4 style="color: var(--dark-50); margin-bottom: var(--space-3);">Технологии</h4>
                 <div class="project-technologies" style="margin-bottom: var(--space-4);">
-                    ${project.technologies.map(tech => 
+                    ${Array.isArray(project.technologies) ? project.technologies.map(tech => 
                         `<span class="project-tech-tag">${tech}</span>`
-                    ).join('')}
+                    ).join('') : ''}
                 </div>
             </div>
+
+            ${project.achievements ? `
+            <div>
+                <h4 style="color: var(--dark-50); margin-bottom: var(--space-3);">✅ Основные достижения</h4>
+                <ul class="project-modal-list" style="color: var(--dark-300); margin-bottom: var(--space-4);">
+                    ${project.achievements.map(achievement => `<li>${achievement}</li>`).join('')}
+                </ul>
+            </div>` : ''}
+
+            ${project.challenges ? `
+            <div>
+                <h4 style="color: var(--dark-50); margin-bottom: var(--space-3);">⚡ Технические вызовы</h4>
+                <ul class="project-modal-list" style="color: var(--dark-300); margin-bottom: var(--space-4);">
+                    ${project.challenges.map(challenge => `<li>${challenge}</li>`).join('')}
+                </ul>
+            </div>` : ''}
 
             <div>
                 <h4 style="color: var(--dark-50); margin-bottom: var(--space-3);">Результаты и метрики</h4>
-                <div class="project-metrics" style="grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));">
-                    ${project.metrics.map(metric => `
-                        <div class="project-metric">
-                            <span class="project-metric-value">${metric.split(' ')[0]}</span>
-                            <span class="project-metric-label">${metric.split(' ').slice(1).join(' ')}</span>
-                        </div>
-                    `).join('')}
+                <div class="project-metrics" style="grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); margin-bottom: var(--space-4);">
+                    ${Array.isArray(project.metrics) ? project.metrics.map(metric => {
+                        const parts = String(metric).split(' ');
+                        return `
+                            <div class="project-metric">
+                                <span class="project-metric-value">${parts[0] || ''}</span>
+                                <span class="project-metric-label">${parts.slice(1).join(' ')}</span>
+                            </div>
+                        `;
+                    }).join('') : ''}
                 </div>
             </div>
 
-            <div class="project-actions" style="justify-content: center; margin-top: var(--space-6);">
-                ${project.github ? `<a href="${project.github}" class="project-btn project-btn-primary" target="_blank">
-                    <i data-lucide="github" style="width: 16px; height: 16px;"></i>
-                    Посмотреть код
-                </a>` : ''}
-                ${project.demo ? `<a href="${project.demo}" class="project-btn project-btn-outline" target="_blank">
+            <div class="project-actions" style="justify-content: center; margin-top: var(--space-6); gap: var(--space-3);">
+                ${project.demo ? `<a href="${project.demo}" class="project-btn project-btn-primary" target="_blank" rel="noopener noreferrer">
                     <i data-lucide="external-link" style="width: 16px; height: 16px;"></i>
-                    Открыть демо
+                    Открыть проект
+                </a>` : ''}
+                ${project.avitoUrl ? `<a href="${project.avitoUrl}" class="project-btn project-btn-outline" target="_blank" rel="noopener noreferrer">
+                    <i data-lucide="shopping-bag" style="width: 16px; height: 16px;"></i>
+                    Авито
+                </a>` : ''}
+                ${project.github ? `<a href="${project.github}" class="project-btn project-btn-outline" target="_blank" rel="noopener noreferrer">
+                    <i data-lucide="github" style="width: 16px; height: 16px;"></i>
+                    GitHub
                 </a>` : ''}
             </div>
         </div>
