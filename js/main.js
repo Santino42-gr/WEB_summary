@@ -7,6 +7,9 @@ MAIN JAVASCRIPT - Основная логика проекта
 
 // ===== ОСНОВНОЙ КЛАСС ПРИЛОЖЕНИЯ =====
 
+// ПРИНУДИТЕЛЬНАЯ ОЧИСТКА КЭША - версия 2.1
+console.log('🔄 ВЕРСИЯ JS: 2.1 - ИСПРАВЛЕНИЕ SLICE ОШИБОК');
+
 class WebResumeApp {
     constructor() {
         this.components = {};
@@ -656,6 +659,12 @@ class ProjectsManager {
         const projectsToShow = featuredProjects.length > 0 ? featuredProjects : (this.projects || []).slice(0, 3);
 
         this.container.innerHTML = projectsToShow.map((project, index) => {
+            // Защита от undefined проекта
+            if (!project) {
+                console.warn('⚠️ Пропускаем undefined проект на индексе', index);
+                return '';
+            }
+            
             const projectType = this.getProjectType(project);
             const glowClass = this.getGlowClass(projectType);
             const gradientClass = this.getGradientClass(projectType);
@@ -678,19 +687,23 @@ class ProjectsManager {
                         <p class="project-description-interactive">${project.description}</p>
                         
                         <div class="project-metrics-interactive">
-                            ${(project.metrics || []).slice(0, 2).map(metric => `
-                                <div class="project-metric-interactive">
-                                    <span class="project-metric-value">${(metric || '').split(' ')[0] || ''}</span>
-                                    <span class="project-metric-label">${(metric || '').split(' ').slice(1).join(' ')}</span>
-                                </div>
-                            `).join('')}
+                            ${Array.isArray(project.metrics) ? project.metrics.slice(0, 2).map(metric => {
+                                const metricStr = String(metric || '');
+                                const parts = metricStr.split(' ');
+                                return `
+                                    <div class="project-metric-interactive">
+                                        <span class="project-metric-value">${parts[0] || ''}</span>
+                                        <span class="project-metric-label">${parts.slice(1).join(' ')}</span>
+                                    </div>
+                                `;
+                            }).join('') : ''}
                         </div>
                         
                         <div class="project-tech-tags-interactive">
-                            ${(project.technologies || []).slice(0, 4).map((tech, techIndex) => {
+                            ${Array.isArray(project.technologies) ? project.technologies.slice(0, 4).map((tech, techIndex) => {
                                 const techClass = this.getTechPillClass(tech, techIndex);
-                                return `<span class="project-tech-pill ${techClass}">${tech || ''}</span>`;
-                            }).join('')}
+                                return `<span class="project-tech-pill ${techClass}">${String(tech || '')}</span>`;
+                            }).join('') : ''}
                         </div>
                         
                         <div class="project-actions-interactive">
