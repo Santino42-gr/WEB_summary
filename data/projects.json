@@ -200,26 +200,6 @@
         "Синхронизация с CRM в реальном времени",
         "Обработка сложных налоговых вопросов"
       ]
-    },
-    {
-      "id": 6,
-      "title": "Voice Assistant Integration",
-      "subtitle": "Интеграция голосового помощника",
-      "description": "Разработка голосового интерфейса для корпоративной системы с поддержкой распознавания речи, обработки естественного языка и синтеза речи.",
-      "technologies": ["Python", "SpeechRecognition", "NLTK", "Azure Cognitive Services", "WebRTC", "Socket.io"],
-      "features": [
-        "Распознавание речи в реальном времени",
-        "Обработка естественного языка",
-        "Мультиязычная поддержка",
-        "Интеграция с существующими системами"
-      ],
-      "github": "https://github.com/example/voice-assistant",
-      "demo": null,
-      "image": "/images/voice-assistant-preview.jpg",
-      "featured": false,
-      "status": "planning",
-      "startDate": null,
-      "endDate": null
     }
   ],
   "categories": [

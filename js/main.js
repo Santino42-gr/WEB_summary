@@ -7,8 +7,8 @@ MAIN JAVASCRIPT - Основная логика проекта
 
 // ===== ОСНОВНОЙ КЛАСС ПРИЛОЖЕНИЯ =====
 
-// ПРИНУДИТЕЛЬНАЯ ОЧИСТКА КЭША - версия 2.1
-console.log('🔄 ВЕРСИЯ JS: 2.1 - ИСПРАВЛЕНИЕ SLICE ОШИБОК');
+// ПРИНУДИТЕЛЬНАЯ ОЧИСТКА КЭША - версия 2.2
+console.log('🔄 ВЕРСИЯ JS: 2.2 - ТОЛЬКО 5 ПРОЕКТОВ БЕЗ КНОПКИ');
 
 class WebResumeApp {
     constructor() {
@@ -654,9 +654,8 @@ class ProjectsManager {
 
         console.log('🎬 Начинаем рендеринг', this.projects?.length || 0, 'проектов');
 
-        // Показываем только топ 3 проекта изначально
-        const featuredProjects = (this.projects || []).filter(p => p?.featured).slice(0, 3);
-        const projectsToShow = featuredProjects.length > 0 ? featuredProjects : (this.projects || []).slice(0, 3);
+        // Показываем все проекты (первые 5)
+        const projectsToShow = (this.projects || []).slice(0, 5);
 
         this.container.innerHTML = projectsToShow.map((project, index) => {
             // Защита от undefined проекта
@@ -770,6 +769,24 @@ class ProjectsManager {
                 technologies: ["MCP Protocol", "YClients API", "Claude"],
                 metrics: ["100% автоматизации", "24/7 работа"],
                 featured: true
+            },
+            {
+                id: 4,
+                title: "Multiagent Development Team",
+                subtitle: "Автономная команда из 7 ИИ-агентов",
+                description: "Система управления командой из 7 специализированных ИИ-агентов для автономной разработки",
+                technologies: ["Claude Code", "Cursor", "MCP Servers", "AI Orchestration"],
+                metrics: ["7 специализированных агентов", "5x ускорение разработки"],
+                featured: true
+            },
+            {
+                id: 5,
+                title: "RAG-системы для бизнеса",
+                subtitle: "Боты для бухгалтерской компании",
+                description: "Комплексное решение RAG + CRM интеграция для автоматизации leads и базы знаний",
+                technologies: ["Vector Embeddings", "Битрикс24 API", "Knowledge Base"],
+                metrics: ["95% точность ответов", "Автоматизация leads"],
+                featured: false
             }
         ];
         
@@ -865,74 +882,10 @@ class ProjectsManager {
             });
         });
 
-        // Обработчик для кнопки "Показать больше проектов"
-        const loadMoreBtn = document.getElementById('load-more-projects');
-        if (loadMoreBtn) {
-            loadMoreBtn.addEventListener('click', () => {
-                this.showAllProjects();
-            });
-        }
+
     }
 
-    showAllProjects() {
-        if (!this.container || !this.projects.length) return;
 
-        this.container.innerHTML = this.projects.map(project => `
-            <div class="project-card" data-aos="fade-up" data-project-id="${project.id}">
-                <div class="project-header">
-                    <div>
-                        <h3 class="project-title">${project.title}</h3>
-                        <p class="project-subtitle">${project.subtitle}</p>
-                    </div>
-                    ${project.featured ? '<span class="project-status featured">Featured</span>' : ''}
-                </div>
-                
-                <p class="project-description">${project.description}</p>
-                
-                <div class="project-technologies">
-                    ${project.technologies.map(tech => 
-                        `<span class="project-tech-tag">${tech}</span>`
-                    ).join('')}
-                </div>
-                
-                <div class="project-metrics">
-                    ${project.metrics.slice(0, 2).map(metric => `
-                        <div class="project-metric">
-                            <span class="project-metric-value">${metric.split(' ')[0]}</span>
-                            <span class="project-metric-label">${metric.split(' ').slice(1).join(' ')}</span>
-                        </div>
-                    `).join('')}
-                </div>
-                
-                <div class="project-actions">
-                    <button class="project-btn project-btn-primary" onclick="openProjectModal(${project.id})">
-                        <i data-lucide="info" style="width: 16px; height: 16px;"></i>
-                        Подробнее
-                    </button>
-                    ${project.github ? `<a href="${project.github}" class="project-btn project-btn-outline" target="_blank">
-                        <i data-lucide="github" style="width: 16px; height: 16px;"></i>
-                        GitHub
-                    </a>` : ''}
-                    ${project.demo ? `<a href="${project.demo}" class="project-btn project-btn-outline" target="_blank">
-                        <i data-lucide="external-link" style="width: 16px; height: 16px;"></i>
-                        Demo
-                    </a>` : ''}
-                </div>
-            </div>
-        `).join('');
-
-        // Скрываем кнопку "Показать больше"
-        const loadMoreBtn = document.getElementById('load-more-projects');
-        if (loadMoreBtn) {
-            loadMoreBtn.parentElement.style.display = 'none';
-        }
-
-        if (typeof lucide !== 'undefined') {
-            lucide.createIcons();
-        }
-
-        this.setupProjectInteractions();
-    }
 }
 
 class SkillsManager {
