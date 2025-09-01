@@ -143,10 +143,17 @@ class WebResumeApp {
             }
 
             // Загружаем проекты
+            console.log('🔄 Начинаем загрузку проектов...');
             const projects = await this.loadJSON('/data/projects.json');
+            console.log('📦 Данные проектов:', projects);
+            
             if (projects) {
+                console.log('✅ Проекты найдены, устанавливаем данные...');
                 this.components.projectsManager.setProjects(projects.projects);
                 this.components.projectsManager.render();
+            } else {
+                console.error('❌ Проекты не загружены, используем demo данные');
+                this.loadDemoData();
             }
 
             // Загружаем навыки
@@ -615,7 +622,8 @@ class AIReadinessChecklist {
 class ProjectsManager {
     constructor() {
         this.projects = [];
-        this.container = document.getElementById('projects-grid');
+        this.container = null;
+        console.log('🏗️ ProjectsManager инициализирован');
     }
 
     setProjects(projects) {
@@ -627,15 +635,21 @@ class ProjectsManager {
         // Переинициализируем контейнер если он не найден
         if (!this.container) {
             this.container = document.getElementById('projects-grid');
+            console.log('🔍 Ищем контейнер projects-grid:', !!this.container);
         }
         
-        if (!this.container || !this.projects.length) {
-            console.warn('⚠️ Контейнер проектов не найден или нет данных:', {
-                container: !!this.container,
-                projectsCount: this.projects.length
-            });
+        if (!this.container) {
+            console.error('❌ Контейнер projects-grid не найден!');
             return;
         }
+
+        if (!this.projects.length) {
+            console.warn('⚠️ Нет проектов для отображения, загружаем demo данные...');
+            this.loadDemoProjects();
+            return;
+        }
+
+        console.log('🎬 Начинаем рендеринг', this.projects.length, 'проектов');
 
         // Показываем только топ 3 проекта изначально
         const featuredProjects = this.projects.filter(p => p.featured).slice(0, 3);
@@ -709,6 +723,46 @@ class ProjectsManager {
             window.interactiveEffects.initMouseTrackingCards();
             window.interactiveEffects.initPulseAnimations();
         }
+        
+        console.log('✅ Рендеринг проектов завершен!');
+    }
+
+    loadDemoProjects() {
+        console.log('🔧 Загружаем demo проекты...');
+        const demoProjects = [
+            {
+                id: 1,
+                title: "Face-Swap Bot",
+                subtitle: "Viral маркетинг инструмент",
+                description: "Telegram-бот для создания стикер-паков с технологией face-swap",
+                technologies: ["Node.js", "Piapi AI", "Telegram Bot API", "Docker"],
+                metrics: ["10K+ строк кода", "50+ пользователей"],
+                featured: true,
+                demo: "https://t.me/demo"
+            },
+            {
+                id: 2,
+                title: "Нейро-Юрист",
+                subtitle: "AI консультант",
+                description: "Система автоматизации юридических консультаций с Mistral API",
+                technologies: ["Mistral API", "RAG", "Vector Database"],
+                metrics: ["95% автоматизации", "100+ консультаций"],
+                featured: true
+            },
+            {
+                id: 3,
+                title: "MCP Server",
+                subtitle: "YClients Integration",
+                description: "Нейро-администратор для автоматизации записи клиентов",
+                technologies: ["MCP Protocol", "YClients API", "Claude"],
+                metrics: ["100% автоматизации", "24/7 работа"],
+                featured: true
+            }
+        ];
+        
+        this.projects = demoProjects;
+        console.log('🚀 Demo проекты загружены:', demoProjects.length);
+        this.render();
     }
 
     getProjectType(project) {
@@ -1248,6 +1302,21 @@ window.webResumeApp = new WebResumeApp();
 document.addEventListener('DOMContentLoaded', () => {
     const interactiveEffects = new InteractiveEffects();
     window.interactiveEffects = interactiveEffects;
+    
+    // Принудительная проверка рендеринга проектов через 1 секунду
+    setTimeout(() => {
+        console.log('🔄 Принудительная проверка рендеринга проектов...');
+        if (window.webResumeApp && window.webResumeApp.components.projectsManager) {
+            const projectsManager = window.webResumeApp.components.projectsManager;
+            if (!projectsManager.projects.length) {
+                console.log('🔧 Принудительная загрузка demo проектов...');
+                projectsManager.loadDemoProjects();
+            } else {
+                console.log('✅ Проекты уже загружены, повторный рендеринг...');
+                projectsManager.render();
+            }
+        }
+    }, 1000);
 });
 
 // Экспортируем компоненты для использования в других файлах
