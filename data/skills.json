@@ -1,195 +1,202 @@
 {
   "skillCategories": [
     {
-      "id": "ai-ml",
-      "category": "AI & Machine Learning",
+      "id": "llm-architecture",
+      "category": "LLM Architecture & Prompt Engineering",
       "icon": "brain",
-      "description": "Разработка интеллектуальных систем и моделей машинного обучения",
+      "description": "Проектирование LLM-систем, промпт-инжиниринг и архитектура ИИ-платформ",
       "skills": [
         {
-          "name": "Python",
+          "name": "Prompt Engineering",
           "level": "Эксперт",
           "progress": 95,
-          "years": 4,
-          "description": "Основной язык для ML и AI разработки"
-        },
-        {
-          "name": "LangChain", 
-          "level": "Продвинутый",
-          "progress": 88,
           "years": 2,
-          "description": "Создание LLM приложений и RAG систем"
+          "description": "Проектирование промптов, Chain-of-Thought, Few-shot learning"
         },
         {
-          "name": "OpenAI API",
-          "level": "Продвинутый", 
+          "name": "LLM Integration",
+          "level": "Эксперт",
           "progress": 92,
           "years": 2,
-          "description": "Интеграция GPT моделей в приложения"
+          "description": "OpenAI, Claude, Mistral, Llama - интеграция в продакшен"
         },
         {
-          "name": "TensorFlow/Keras",
-          "level": "Продвинутый",
-          "progress": 82,
-          "years": 3,
-          "description": "Создание и обучение нейронных сетей"
-        },
-        {
-          "name": "PyTorch",
-          "level": "Средний",
-          "progress": 75,
+          "name": "RAG Architecture",
+          "level": "Эксперт", 
+          "progress": 90,
           "years": 2,
-          "description": "Исследования и эксперименты в ML"
+          "description": "Retrieval-Augmented Generation с векторными базами"
         },
         {
-          "name": "Hugging Face Transformers",
-          "level": "Продвинутый",
-          "progress": 85,
-          "years": 2,
-          "description": "Работа с pre-trained языковыми моделями"
-        }
-      ]
-    },
-    {
-      "id": "backend",
-      "category": "Backend Development",
-      "icon": "server",
-      "description": "Разработка серверной логики и API",
-      "skills": [
-        {
-          "name": "FastAPI",
-          "level": "Эксперт",
-          "progress": 93,
-          "years": 3,
-          "description": "Создание высокопроизводительных API"
-        },
-        {
-          "name": "Node.js",
-          "level": "Продвинутый",
-          "progress": 85,
-          "years": 3,
-          "description": "JavaScript серверная разработка"
-        },
-        {
-          "name": "PostgreSQL",
+          "name": "Function Calling & Tools",
           "level": "Продвинутый",
           "progress": 88,
-          "years": 4,
-          "description": "Реляционные базы данных и SQL"
+          "years": 1.5,
+          "description": "Structured outputs, function calling, tool integration"
         },
         {
-          "name": "MongoDB",
-          "level": "Средний",
-          "progress": 72,
-          "years": 2,
-          "description": "NoSQL документо-ориентированные БД"
-        },
-        {
-          "name": "Redis",
+          "name": "Multi-Agent Systems",
           "level": "Продвинутый",
-          "progress": 80,
-          "years": 2,
-          "description": "Кеширование и очереди сообщений"
+          "progress": 85,
+          "years": 1,
+          "description": "Оркестрация команд ИИ-агентов, MCP Protocol"
         },
         {
-          "name": "Docker",
+          "name": "LangChain/LlamaIndex",
           "level": "Продвинутый",
           "progress": 87,
-          "years": 3,
-          "description": "Контейнеризация приложений"
+          "years": 2,
+          "description": "Современные фреймворки для LLM приложений"
         }
       ]
     },
     {
-      "id": "frontend",
-      "category": "Frontend Development", 
-      "icon": "code",
-      "description": "Создание пользовательских интерфейсов",
+      "id": "ai-integration",
+      "category": "AI Integration & Development", 
+      "icon": "cpu",
+      "description": "Интеграция ИИ в бизнес-процессы и создание production-ready решений",
       "skills": [
         {
-          "name": "JavaScript/ES6+",
+          "name": "Python для AI",
           "level": "Эксперт",
-          "progress": 92,
-          "years": 5,
-          "description": "Современный JavaScript и веб-стандарты"
+          "progress": 95,
+          "years": 3,
+          "description": "Основной язык для ИИ разработки, 10,000+ строк кода"
         },
         {
-          "name": "React",
+          "name": "API Интеграции",
+          "level": "Эксперт",
+          "progress": 92,
+          "years": 3,
+          "description": "REST APIs, webhooks, real-time интеграции"
+        },
+        {
+          "name": "Vector Databases",
+          "level": "Продвинутый",
+          "progress": 85,
+          "years": 1.5,
+          "description": "Pinecone, Chroma, embeddings для RAG систем"
+        },
+        {
+          "name": "Telegram Bot API",
+          "level": "Продвинутый",
+          "progress": 88,
+          "years": 2,
+          "description": "Создание ИИ-ботов, Face-Swap проект"
+        },
+        {
+          "name": "MCP Protocol",
+          "level": "Продвинутый",
+          "progress": 82,
+          "years": 0.5,
+          "description": "Model Context Protocol для Claude интеграций"
+        },
+        {
+          "name": "CRM Integration",
+          "level": "Средний",
+          "progress": 75,
+          "years": 1,
+          "description": "Битрикс24, YClients API интеграции"
+        }
+      ]
+    },
+    {
+      "id": "specialized-ai",
+      "category": "Specialized AI Technologies", 
+      "icon": "zap",
+      "description": "Специализированные ИИ технологии и мультимодальные системы",
+      "skills": [
+        {
+          "name": "Multimodal AI",
+          "level": "Продвинутый",
+          "progress": 80,
+          "years": 1,
+          "description": "Face-swap, computer vision, мультимодальные модели"
+        },
+        {
+          "name": "AI Agents & Memory",
+          "level": "Продвинутый",
+          "progress": 85,
+          "years": 1,
+          "description": "Persistent memory, agent orchestration, workflows"
+        },
+        {
+          "name": "Mistral AI Integration",
+          "level": "Продвинутый",
+          "progress": 88,
+          "years": 0.5,
+          "description": "Реальный опыт интеграции Mistral API в проектах"
+        },
+        {
+          "name": "Embeddings & Search",
+          "level": "Продвинутый",
+          "progress": 87,
+          "years": 1.5,
+          "description": "Vector search, semantic similarity, knowledge retrieval"
+        },
+        {
+          "name": "AI Automation",
+          "level": "Эксперт",
+          "progress": 92,
+          "years": 2,
+          "description": "Автоматизация бизнес-процессов через ИИ"
+        },
+        {
+          "name": "Content Generation",
+          "level": "Продвинутый",
+          "progress": 85,
+          "years": 1.5,
+          "description": "Автоматическая генерация контента, стикер-паки"
+        }
+      ]
+    },
+    {
+      "id": "development-tools",
+      "category": "Development & Platform Creation",
+      "icon": "code",
+      "description": "Создание SDK, платформ и инструментов для разработки",
+      "skills": [
+        {
+          "name": "SDK Development",
+          "level": "Продвинутый", 
+          "progress": 82,
+          "years": 1,
+          "description": "Создание SDK и low-code платформ"
+        },
+        {
+          "name": "JavaScript/Node.js",
           "level": "Продвинутый",
           "progress": 88,
           "years": 3,
-          "description": "Создание интерактивных пользовательских интерфейсов"
+          "description": "Frontend и backend разработка"
         },
         {
-          "name": "Vue.js",
-          "level": "Средний",
-          "progress": 70,
-          "years": 1,
-          "description": "Прогрессивный JavaScript фреймворк"
-        },
-        {
-          "name": "CSS/SCSS",
+          "name": "Docker & Containerization",
           "level": "Продвинутый",
-          "progress": 89,
+          "progress": 85,
+          "years": 2,
+          "description": "Контейнеризация ИИ приложений"
+        },
+        {
+          "name": "Cursor AI & AI-Assisted Development",
+          "level": "Эксперт",
+          "progress": 95,
+          "years": 1,
+          "description": "AI-powered разработка, multiagent команды"
+        },
+        {
+          "name": "Git & Version Control",
+          "level": "Эксперт",
+          "progress": 92,
           "years": 4,
-          "description": "Стилизация и адаптивный дизайн"
+          "description": "Управление кодом и коллаборация"
         },
         {
           "name": "TypeScript",
           "level": "Продвинутый",
           "progress": 83,
           "years": 2,
-          "description": "Типизированный JavaScript для больших проектов"
-        },
-        {
-          "name": "D3.js",
-          "level": "Средний",
-          "progress": 65,
-          "years": 1,
-          "description": "Создание интерактивных визуализаций данных"
-        }
-      ]
-    },
-    {
-      "id": "devops",
-      "category": "DevOps & Cloud",
-      "icon": "cloud",
-      "description": "Автоматизация развертывания и облачные технологии",
-      "skills": [
-        {
-          "name": "GitHub Actions",
-          "level": "Продвинутый", 
-          "progress": 85,
-          "years": 2,
-          "description": "CI/CD автоматизация и деплойменты"
-        },
-        {
-          "name": "Vercel",
-          "level": "Продвинутый",
-          "progress": 88,
-          "years": 2,
-          "description": "Serverless функции и фронтенд хостинг"
-        },
-        {
-          "name": "AWS",
-          "level": "Средний",
-          "progress": 68,
-          "years": 1,
-          "description": "Облачные сервисы Amazon"
-        },
-        {
-          "name": "Kubernetes",
-          "level": "Начальный",
-          "progress": 45,
-          "years": 0.5,
-          "description": "Оркестрация контейнеров"
-        },
-        {
-          "name": "Nginx",
-          "level": "Средний",
-          "progress": 72,
-          "years": 2,
-          "description": "Веб-сервер и reverse proxy"
+          "description": "Типизированная разработка для больших проектов"
         }
       ]
     },
@@ -258,9 +265,16 @@
       "credentialId": "TF-987654321"
     }
   ],
-  "totalYearsExperience": 4,
+  "totalYearsExperience": 3,
   "primaryLanguages": ["Python", "JavaScript"],
-  "frameworks": ["FastAPI", "React", "LangChain", "TensorFlow"],
-  "databases": ["PostgreSQL", "MongoDB", "Redis"],
-  "tools": ["Docker", "Git", "Jupyter", "VS Code", "Postman"]
+  "frameworks": ["LangChain", "OpenAI API", "Mistral API", "Claude API", "FastAPI"],
+  "specializations": ["Prompt Engineering", "RAG Architecture", "Multi-Agent Systems", "AI Integration"],
+  "tools": ["Cursor AI", "Docker", "Git", "MCP Protocol", "Vector Databases"],
+  "contact": {
+    "website": "https://aironlab.ru",
+    "telegram": "https://tlgg.ru/@Aironlab",
+    "email": "info@aironlab.ru",
+    "vcru": "https://vc.ru/u/aironlab",
+    "habr": "https://habr.com/ru/users/aironlab"
+  }
 }

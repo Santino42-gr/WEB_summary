@@ -2,103 +2,133 @@
   "projects": [
     {
       "id": 1,
-      "title": "RAG Chat System",
-      "subtitle": "Интеллектуальная система вопросов-ответов",
-      "description": "Система чат-бота с использованием RAG (Retrieval-Augmented Generation) архитектуры для предоставления точных ответов на основе базы знаний. Включает векторный поиск, контекстуальную генерацию и обучение на пользовательской обратной связи.",
-      "technologies": ["Python", "LangChain", "OpenAI API", "FastAPI", "Pinecone", "React"],
+      "title": "Face-Swap Bot для \"Новые Люди\"",
+      "subtitle": "Viral маркетинг инструмент с ИИ",
+      "description": "Telegram-бот для создания стикер-паков с технологией face-swap. Позволяет пользователям накладывать свои лица на политические мемы. Полная разработка за 4 дня с архитектурой на Node.js и интеграцией с Piapi AI.",
+      "technologies": ["Node.js", "Piapi AI", "Telegram Bot API", "Docker", "Face-Swap AI"],
       "features": [
-        "Векторный поиск по базе знаний",
-        "Контекстуальная генерация ответов",
-        "Обучение на feedback пользователей",
-        "RESTful API для интеграции"
+        "Автоматическое создание стикер-паков",
+        "Интеграция с Telegram Bot API",
+        "Face-swap технология через Piapi AI",
+        "Viral распространение контента"
       ],
-      "github": "https://github.com/example/rag-chat-system",
-      "demo": "https://rag-chat-demo.vercel.app",
-      "image": "/images/rag-chat-preview.jpg",
+      "metrics": [
+        "10,000+ строк кода",
+        "50+ пользователей за 24 часа", 
+        "300+ стикер-паков создано",
+        "4 дня полной разработки"
+      ],
+      "github": "https://github.com/aironlab/face-swap-bot",
+      "demo": "https://t.me/NewPeopleBot",
+      "image": "/images/face-swap-preview.jpg",
       "featured": true,
       "status": "completed",
-      "startDate": "2024-01-15",
-      "endDate": "2024-03-20"
+      "startDate": "2024-11-01",
+      "endDate": "2024-11-05"
     },
     {
       "id": 2,
-      "title": "ML Pipeline Automation",
-      "subtitle": "Автоматизированный пайплайн машинного обучения",
-      "description": "Комплексная система автоматизации процессов машинного обучения от сбора данных до деплоя моделей в продакшен. Включает мониторинг производительности, A/B тестирование и автоматический откат моделей.",
-      "technologies": ["Python", "MLflow", "Docker", "Kubernetes", "Apache Airflow", "PostgreSQL"],
+      "title": "Нейро-Юрист с Mistral API",
+      "subtitle": "ИИ для автоматизации юридических консультаций",
+      "description": "Интеллектуальная система юридических консультаций на базе Mistral API с RAG архитектурой. Автоматизирует первичные консультации граждан, анализ документов и предоставление правовых рекомендаций с использованием Function Calling.",
+      "technologies": ["Mistral API", "RAG Architecture", "Function Calling", "Vector Database", "Python", "FastAPI"],
       "features": [
-        "Автоматическое обучение моделей",
-        "Версионирование экспериментов",
-        "Continuous deployment",
-        "Мониторинг drift данных"
+        "Первичные юридические консультации",
+        "Анализ правовых документов", 
+        "RAG поиск по правовой базе",
+        "Function Calling для структурированных ответов"
       ],
-      "github": "https://github.com/example/ml-pipeline",
-      "demo": null,
-      "image": "/images/ml-pipeline-preview.jpg",
+      "metrics": [
+        "Интеграция с Mistral API",
+        "Автоматизация консультаций",
+        "Анализ юридических документов",
+        "Правовая база знаний"
+      ],
+      "github": "https://github.com/aironlab/mistral-lawyer",
+      "demo": "https://neuro-lawyer-demo.vercel.app",
+      "image": "/images/mistral-lawyer-preview.jpg",
       "featured": true,
       "status": "completed",
-      "startDate": "2023-09-10",
-      "endDate": "2024-01-25"
+      "startDate": "2024-09-15",
+      "endDate": "2024-11-20"
     },
     {
       "id": 3,
-      "title": "Data Analytics Dashboard",
-      "subtitle": "Интерактивная аналитическая панель",
-      "description": "Современный дашборд для анализа больших данных с интерактивными визуализациями, прогнозированием трендов и экспортом отчетов. Поддерживает подключение к различным источникам данных.",
-      "technologies": ["React", "D3.js", "Node.js", "ClickHouse", "WebSocket", "Chart.js"],
+      "title": "MCP Server для YClients",
+      "subtitle": "Нейро-администратор для салонов красоты",
+      "description": "Model Context Protocol (MCP) сервер для интеграции Claude AI с YClients API. Автоматизирует запись клиентов, управление расписанием и обработку заявок через ИИ-ассистента. Полная интеграция с CRM системой салонов красоты.",
+      "technologies": ["MCP Protocol", "YClients API", "Claude Integration", "Node.js", "TypeScript", "SSE"],
       "features": [
-        "Интерактивные графики и диаграммы",
-        "Real-time обновления данных",
-        "Прогнозирование трендов",
-        "Экспорт в различные форматы"
+        "Интеграция Claude с YClients API",
+        "Автоматическая запись клиентов",
+        "Управление расписанием через ИИ",
+        "Server-Sent Events для real-time"
       ],
-      "github": "https://github.com/example/analytics-dashboard",
-      "demo": "https://analytics-demo.vercel.app",
-      "image": "/images/analytics-preview.jpg",
-      "featured": false,
+      "metrics": [
+        "Полная автоматизация записи",
+        "Интеграция с CRM системой",
+        "Model Context Protocol",
+        "Real-time синхронизация"
+      ],
+      "github": "https://github.com/aironlab/yclients-mcp",
+      "demo": "https://yclients-demo.railway.app",
+      "image": "/images/yclients-mcp-preview.jpg",
+      "featured": true,
       "status": "completed",
-      "startDate": "2023-06-01",
-      "endDate": "2023-08-30"
+      "startDate": "2024-12-01",
+      "endDate": "2024-12-15"
     },
     {
       "id": 4,
-      "title": "AI Content Generator",
-      "subtitle": "Генератор контента с использованием ИИ",
-      "description": "Инструмент для автоматической генерации контента (статьи, посты, описания товаров) с использованием больших языковых моделей. Поддерживает различные стили и форматы контента.",
-      "technologies": ["Python", "OpenAI GPT-4", "Streamlit", "LangChain", "Redis", "PostgreSQL"],
+      "title": "Multiagent Development Team",
+      "subtitle": "Автономная команда из 7 ИИ-агентов",
+      "description": "Революционная система разработки с командой из 7 специализированных ИИ-агентов: Project Manager, AI Developer, Frontend/Backend разработчики, Design Agent, Design Review Agent и QA. Оркестрация через Claude Code и MCP Servers с 5x ускорением разработки.",
+      "technologies": ["Claude Code", "Cursor AI", "MCP Servers", "AI Orchestration", "Multi-Agent Systems", "Prompt Engineering"],
       "features": [
-        "Генерация контента в разных стилях",
-        "Оптимизация для SEO",
-        "Пакетная обработка",
-        "API для интеграции"
+        "7 специализированных ИИ-агентов",
+        "Автономное управление проектами",
+        "AI Code Review и QA",
+        "Интеграция с Cursor AI"
       ],
-      "github": "https://github.com/example/ai-content-generator",
-      "demo": "https://ai-content-demo.streamlit.app",
-      "image": "/images/ai-content-preview.jpg",
-      "featured": false,
+      "metrics": [
+        "7 специализированных агентов",
+        "5x ускорение разработки",
+        "10,000+ строк кода",
+        "Автономная координация"
+      ],
+      "github": "https://github.com/aironlab/multiagent-team",
+      "demo": "https://multiagent-demo.aironlab.ru",
+      "image": "/images/multiagent-preview.jpg",
+      "featured": true,
       "status": "in_progress",
-      "startDate": "2024-02-01",
+      "startDate": "2024-10-01",
       "endDate": null
     },
     {
       "id": 5,
-      "title": "Smart Recommendation Engine",
-      "subtitle": "Интеллектуальная система рекомендаций",
-      "description": "Система персонализированных рекомендаций использующая collaborative filtering, content-based методы и глубокое обучение для предсказания предпочтений пользователей.",
-      "technologies": ["Python", "TensorFlow", "Apache Spark", "Elasticsearch", "Apache Kafka", "MongoDB"],
+      "title": "RAG-системы для бизнеса",
+      "subtitle": "Интеллектуальные боты для CRM и продаж",
+      "description": "Комплексные RAG-системы для автоматизации бизнес-процессов: интеграция с Битрикс24 CRM, создание чат-ботов для сайтов и Авито, автоматизация работы с leads. Vector Embeddings для точного поиска по базе знаний компании.",
+      "technologies": ["Vector Embeddings", "Битрикс24 API", "Knowledge Base", "RAG Architecture", "CRM Integration", "OpenAI"],
       "features": [
-        "Гибридные алгоритмы рекомендаций",
-        "Real-time персонализация",
-        "A/B тестирование рекомендаций",
-        "Масштабируемая архитектура"
+        "Интеграция с Битрикс24 CRM",
+        "Автоматизация leads обработки",
+        "Чат-боты для сайта и Авито",
+        "Vector поиск по базе знаний"
       ],
-      "github": "https://github.com/example/recommendation-engine",
-      "demo": null,
-      "image": "/images/recommendations-preview.jpg",
+      "metrics": [
+        "95% автоматизации в RAG проектах",
+        "База знаний компании",
+        "CRM интеграция",
+        "Автоматизация leads"
+      ],
+      "github": "https://github.com/aironlab/business-rag",
+      "demo": "https://rag-business-demo.vercel.app",
+      "image": "/images/business-rag-preview.jpg",
       "featured": false,
       "status": "completed",
-      "startDate": "2023-03-15",
-      "endDate": "2023-07-20"
+      "startDate": "2024-06-01",
+      "endDate": "2024-09-30"
     },
     {
       "id": 6,
