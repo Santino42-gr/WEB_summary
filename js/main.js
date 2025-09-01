@@ -145,16 +145,30 @@ class WebResumeApp {
             // Загружаем проекты
             const projects = await this.loadJSON('/data/projects.json');
             if (projects) {
-                this.components.projectsManager.setProjects(projects);
+                this.components.projectsManager.setProjects(projects.projects);
                 this.components.projectsManager.render();
             }
 
             // Загружаем навыки
             const skills = await this.loadJSON('/data/skills.json');
             if (skills) {
-                this.components.skillsManager.setSkills(skills);
+                this.components.skillsManager.setSkills(skills.skillCategories);
                 this.components.skillsManager.render();
             }
+
+            // Загружаем предложенные вопросы
+            const suggestedQuestions = await this.loadJSON('/data/suggested-questions.json');
+            if (suggestedQuestions) {
+                this.components.ragChat.setSuggestedQuestions(suggestedQuestions);
+            }
+
+            // Загружаем индекс поиска
+            const searchIndex = await this.loadJSON('/data/search-index.json');
+            if (searchIndex) {
+                this.components.ragChat.setSearchIndex(searchIndex);
+            }
+
+            console.log('✅ Все данные успешно загружены');
 
         } catch (error) {
             console.warn('⚠️ Некоторые данные не удалось загрузить:', error);
@@ -424,6 +438,45 @@ class RAGChatComponent {
 
     setKnowledgeBase(knowledgeBase) {
         this.knowledgeBase = knowledgeBase;
+        console.log('📚 База знаний загружена:', knowledgeBase.documents?.length, 'документов');
+    }
+
+    setSuggestedQuestions(suggestedQuestions) {
+        this.suggestedQuestions = suggestedQuestions;
+        this.updateSuggestedQuestions();
+        console.log('❓ Загружено вопросов:', suggestedQuestions.categories?.length, 'категорий');
+    }
+
+    setSearchIndex(searchIndex) {
+        this.searchIndex = searchIndex;
+        console.log('🔍 Индекс поиска загружен');
+    }
+
+    updateSuggestedQuestions() {
+        if (!this.suggestedQuestions) return;
+
+        const suggestionsContainer = document.getElementById('chat-suggestions');
+        if (!suggestionsContainer) return;
+
+        // Берем первые 4 быстрых вопроса
+        const quickQuestions = this.suggestedQuestions.quickQuestions?.slice(0, 4) || [];
+        
+        suggestionsContainer.innerHTML = quickQuestions.map(question => 
+            `<button class="chat-suggestion" data-question="${question}">
+                ${question}
+            </button>`
+        ).join('');
+
+        // Обновляем обработчики событий
+        suggestionsContainer.querySelectorAll('.chat-suggestion').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const question = btn.getAttribute('data-question');
+                if (question && this.chatInput) {
+                    this.chatInput.value = question;
+                    this.sendMessage();
+                }
+            });
+        });
     }
 
     async sendMessage() {
@@ -446,23 +499,57 @@ class RAGChatComponent {
     }
 
     async generateResponse(message) {
-        // Заглушка - в реальности здесь будет вызов API
         await new Promise(resolve => setTimeout(resolve, 1500));
         
-        const demoResponses = {
-            'llm': 'Я работаю с различными LLM: GPT-4, Claude, Mistral. Создавал чат-боты и RAG-системы.',
-            'rag': 'RAG (Retrieval-Augmented Generation) - это архитектура, которая сочетает поиск релевантной информации с генерацией ответов. Я использовал её в нескольких проектах.',
-            'стек': 'Мой технический стек: Python, JavaScript, React, FastAPI, LangChain, OpenAI API, Docker.'
-        };
-
-        const lowerMessage = message.toLowerCase();
-        for (const [key, response] of Object.entries(demoResponses)) {
-            if (lowerMessage.includes(key)) {
-                return response;
+        // Используем улучшенные демо-ответы из базы знаний
+        if (this.knowledgeBase?.demoResponses) {
+            const lowerMessage = message.toLowerCase();
+            
+            // Проверяем демо-ответы
+            for (const [key, response] of Object.entries(this.knowledgeBase.demoResponses)) {
+                if (lowerMessage.includes(key)) {
+                    return response;
+                }
             }
         }
 
-        return 'Спасибо за вопрос! Я специализируюсь на разработке AI-решений и буду рад обсудить детали моего опыта.';
+        // Поиск в документах базы знаний
+        if (this.knowledgeBase?.documents) {
+            const relevantDoc = this.searchKnowledgeBase(message);
+            if (relevantDoc) {
+                return `${relevantDoc.content}\n\n💡 *Источник: ${relevantDoc.title}*`;
+            }
+        }
+
+        // Fallback responses
+        const fallbackResponses = [
+            'Спасибо за вопрос! Я специализируюсь на Prompt Engineering, RAG системах и мультиагентных решениях. Уточните, что именно вас интересует?',
+            'Интересная тема! Хотя точной информации по этому вопросу нет, я могу рассказать о релевантном опыте из моих проектов.',
+            'Могу поделиться опытом из схожих проектов. Например, в работе с Mistral API или RAG системами я сталкивался с похожими задачами.'
+        ];
+
+        return fallbackResponses[Math.floor(Math.random() * fallbackResponses.length)];
+    }
+
+    searchKnowledgeBase(query) {
+        if (!this.knowledgeBase?.documents) return null;
+
+        const lowerQuery = query.toLowerCase();
+        
+        // Простой поиск по ключевым словам и содержимому
+        for (const doc of this.knowledgeBase.documents) {
+            const hasKeywordMatch = doc.keywords?.some(keyword => 
+                lowerQuery.includes(keyword.toLowerCase())
+            );
+            
+            const hasContentMatch = doc.content?.toLowerCase().includes(lowerQuery.split(' ')[0]);
+            
+            if (hasKeywordMatch || hasContentMatch) {
+                return doc;
+            }
+        }
+        
+        return null;
     }
 
     addMessage(content, sender) {
@@ -533,6 +620,7 @@ class ProjectsManager {
 
     setProjects(projects) {
         this.projects = projects;
+        console.log('🚀 Проекты загружены:', projects?.length, 'проектов');
     }
 
     render() {
@@ -576,6 +664,7 @@ class SkillsManager {
 
     setSkills(skills) {
         this.skills = skills;
+        console.log('🎯 Навыки загружены:', skills?.length, 'категорий');
     }
 
     render() {

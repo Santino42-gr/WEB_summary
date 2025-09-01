@@ -1,0 +1,241 @@
+{
+  "categories": [
+    {
+      "id": "prompt-engineering",
+      "name": "Prompt Engineering & LLM",
+      "icon": "brain",
+      "color": "#3b82f6",
+      "questions": [
+        {
+          "id": "prompt-experience",
+          "text": "Расскажи о своем опыте с промпт-инжинирингом",
+          "keywords": ["промпт", "prompt", "engineering", "опыт"],
+          "expectedTopics": ["Chain-of-Thought", "Few-shot learning", "проектирование промптов"]
+        },
+        {
+          "id": "llm-integration",
+          "text": "Какой опыт интеграции с LLM моделями?",
+          "keywords": ["LLM", "интеграция", "модели", "GPT", "Claude", "Mistral"],
+          "expectedTopics": ["OpenAI API", "Claude API", "Mistral API", "production"]
+        },
+        {
+          "id": "mistral-experience",
+          "text": "Какой опыт интеграции с Mistral API?",
+          "keywords": ["Mistral", "API", "интеграция", "опыт"],
+          "expectedTopics": ["Нейро-Юрист проект", "Function Calling", "юридические консультации"]
+        }
+      ]
+    },
+    {
+      "id": "rag-systems",
+      "name": "RAG Архитектура",
+      "icon": "search",
+      "color": "#10b981",
+      "questions": [
+        {
+          "id": "rag-architecture",
+          "text": "Как работает твоя RAG-система?",
+          "keywords": ["RAG", "retrieval", "generation", "архитектура"],
+          "expectedTopics": ["векторный поиск", "embedding", "Pinecone", "Chroma"]
+        },
+        {
+          "id": "rag-projects",
+          "text": "Какие RAG проекты ты делал?",
+          "keywords": ["RAG", "проекты", "примеры", "кейсы"],
+          "expectedTopics": ["бизнес RAG", "Битрикс24", "автоматизация"]
+        },
+        {
+          "id": "vector-search",
+          "text": "Опыт с векторными базами данных",
+          "keywords": ["векторный", "поиск", "embedding", "база данных"],
+          "expectedTopics": ["Pinecone", "Chroma", "semantic similarity", "knowledge retrieval"]
+        }
+      ]
+    },
+    {
+      "id": "multiagent-systems",
+      "name": "Multi-Agent системы",
+      "icon": "users",
+      "color": "#f59e0b",
+      "questions": [
+        {
+          "id": "multiagent-project",
+          "text": "Расскажи о проекте с мультиагентными системами",
+          "keywords": ["мультиагент", "multiagent", "агенты", "команда"],
+          "expectedTopics": ["7 ИИ-агентов", "Claude Code", "Cursor AI", "5x ускорение"]
+        },
+        {
+          "id": "agent-orchestration",
+          "text": "Как организована оркестрация агентов?",
+          "keywords": ["оркестрация", "агенты", "координация", "workflow"],
+          "expectedTopics": ["MCP Protocol", "автономная координация", "Project Manager"]
+        },
+        {
+          "id": "ai-team-management",
+          "text": "Управление командой ИИ-агентов",
+          "keywords": ["управление", "команда", "ИИ", "агенты"],
+          "expectedTopics": ["специализированные роли", "AI Code Review", "QA automation"]
+        }
+      ]
+    },
+    {
+      "id": "technical-projects",
+      "name": "Технические проекты",
+      "icon": "code",
+      "color": "#8b5cf6",
+      "questions": [
+        {
+          "id": "face-swap-bot",
+          "text": "Расскажи о Face-Swap боте для 'Новые Люди'",
+          "keywords": ["face-swap", "бот", "telegram", "стикеры"],
+          "expectedTopics": ["Piapi AI", "300+ стикер-паков", "viral маркетинг", "4 дня разработки"]
+        },
+        {
+          "id": "yclients-mcp",
+          "text": "Что такое MCP Server для YClients?",
+          "keywords": ["MCP", "YClients", "сервер", "интеграция"],
+          "expectedTopics": ["Model Context Protocol", "Claude Integration", "нейро-администратор"]
+        },
+        {
+          "id": "development-speed",
+          "text": "Как достигается 5x ускорение разработки?",
+          "keywords": ["ускорение", "разработка", "автоматизация", "AI"],
+          "expectedTopics": ["multiagent команды", "Cursor AI", "AI-assisted development"]
+        }
+      ]
+    },
+    {
+      "id": "business-integration",
+      "name": "Бизнес интеграция",
+      "icon": "briefcase",
+      "color": "#ef4444",
+      "questions": [
+        {
+          "id": "crm-integration",
+          "text": "Опыт интеграции ИИ с CRM системами",
+          "keywords": ["CRM", "интеграция", "Битрикс24", "автоматизация"],
+          "expectedTopics": ["leads обработка", "чат-боты для Авито", "бизнес-процессы"]
+        },
+        {
+          "id": "ai-automation",
+          "text": "Как автоматизировать бизнес-процессы с ИИ?",
+          "keywords": ["автоматизация", "бизнес", "процессы", "ИИ"],
+          "expectedTopics": ["95% автоматизации", "RAG системы", "CRM интеграция"]
+        },
+        {
+          "id": "content-generation",
+          "text": "Автоматическая генерация контента",
+          "keywords": ["генерация", "контент", "автоматизация"],
+          "expectedTopics": ["стикер-паки", "маркетинг материалы", "LLM генерация"]
+        }
+      ]
+    },
+    {
+      "id": "technical-stack",
+      "name": "Технический стек",
+      "icon": "settings",
+      "color": "#06b6d4",
+      "questions": [
+        {
+          "id": "tech-stack",
+          "text": "Твой технический стек для AI разработки",
+          "keywords": ["технический", "стек", "инструменты", "языки"],
+          "expectedTopics": ["Python", "JavaScript", "LangChain", "Docker", "Cursor AI"]
+        },
+        {
+          "id": "development-tools",
+          "text": "Какие инструменты используешь для AI разработки?",
+          "keywords": ["инструменты", "разработка", "AI", "технологии"],
+          "expectedTopics": ["Cursor AI", "MCP Protocol", "Vector Databases", "Git"]
+        },
+        {
+          "id": "learning-approach",
+          "text": "Как изучаешь новые AI технологии?",
+          "keywords": ["обучение", "изучение", "технологии", "развитие"],
+          "expectedTopics": ["практические проекты", "AI сообщество", "документация"]
+        }
+      ]
+    }
+  ],
+  "quickQuestions": [
+    "Опыт с Mistral API",
+    "RAG архитектура",
+    "Multiagent системы", 
+    "Face-Swap проект",
+    "YClients MCP",
+    "5x ускорение разработки",
+    "Prompt Engineering",
+    "LLM интеграция",
+    "Автоматизация бизнеса",
+    "Технический стек"
+  ],
+  "popularTopics": [
+    {
+      "topic": "Prompt Engineering",
+      "count": 45,
+      "trend": "up"
+    },
+    {
+      "topic": "RAG системы", 
+      "count": 38,
+      "trend": "up"
+    },
+    {
+      "topic": "Multiagent системы",
+      "count": 32,
+      "trend": "up"
+    },
+    {
+      "topic": "Mistral API",
+      "count": 28,
+      "trend": "stable"
+    },
+    {
+      "topic": "LLM интеграция",
+      "count": 41,
+      "trend": "up"
+    }
+  ],
+  "demoScenarios": [
+    {
+      "id": "prompt-engineer-interview",
+      "name": "Интервью на Prompt Engineer",
+      "description": "Типичные вопросы для позиции Prompt Engineer",
+      "questions": [
+        "Расскажи о своем опыте с промпт-инжинирингом",
+        "Какой опыт интеграции с Mistral API?",
+        "Как работает твоя RAG-система?",
+        "Расскажи о проекте с мультиагентными системами"
+      ]
+    },
+    {
+      "id": "technical-deep-dive",
+      "name": "Техническая экспертиза",
+      "description": "Глубокие технические вопросы",
+      "questions": [
+        "Опыт с векторными базами данных",
+        "Как достигается 5x ускорение разработки?",
+        "Твой технический стек для AI разработки",
+        "Что такое MCP Server для YClients?"
+      ]
+    },
+    {
+      "id": "business-cases",
+      "name": "Бизнес кейсы",
+      "description": "Практические применения ИИ в бизнесе",
+      "questions": [
+        "Опыт интеграции ИИ с CRM системами",
+        "Как автоматизировать бизнес-процессы с ИИ?",
+        "Расскажи о Face-Swap боте для 'Новые Люди'",
+        "Автоматическая генерация контента"
+      ]
+    }
+  ],
+  "metadata": {
+    "totalQuestions": 18,
+    "categories": 6,
+    "lastUpdated": "2025-01-09",
+    "version": "1.0",
+    "purpose": "Interactive RAG chat suggestions for AI specialist resume"
+  }
+}

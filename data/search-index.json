@@ -1,0 +1,182 @@
+{
+  "searchIndex": {
+    "documents": [
+      {
+        "id": "ai-expertise",
+        "searchTerms": ["ai", "искусственный интеллект", "llm", "gpt", "claude", "mistral", "машинное обучение", "чат-бот", "автоматизация"],
+        "priority": 1,
+        "boost": 2.0
+      },
+      {
+        "id": "rag-systems", 
+        "searchTerms": ["rag", "retrieval", "generation", "векторный поиск", "embedding", "база знаний", "pinecone", "chroma"],
+        "priority": 1,
+        "boost": 2.0
+      },
+      {
+        "id": "project-face-swap",
+        "searchTerms": ["face-swap", "face swap", "новые люди", "telegram", "бот", "стикеры", "viral", "маркетинг", "piapi"],
+        "priority": 2,
+        "boost": 1.8
+      },
+      {
+        "id": "project-mistral-lawyer",
+        "searchTerms": ["mistral", "юрист", "lawyer", "консультации", "function calling", "правовые"],
+        "priority": 2,
+        "boost": 1.8
+      },
+      {
+        "id": "project-yclients",
+        "searchTerms": ["yclients", "mcp", "model context protocol", "claude", "администратор", "салон"],
+        "priority": 2,
+        "boost": 1.5
+      },
+      {
+        "id": "multiagent-team",
+        "searchTerms": ["multiagent", "мультиагент", "команда", "агенты", "7 агентов", "cursor", "claude code"],
+        "priority": 1,
+        "boost": 2.0
+      }
+    ],
+    "skills": [
+      {
+        "skill": "Prompt Engineering",
+        "searchTerms": ["prompt", "промпт", "инжиниринг", "проектирование"],
+        "level": "expert",
+        "boost": 2.0
+      },
+      {
+        "skill": "LLM Integration", 
+        "searchTerms": ["llm", "интеграция", "openai", "claude", "mistral", "api"],
+        "level": "expert",
+        "boost": 2.0
+      },
+      {
+        "skill": "RAG Architecture",
+        "searchTerms": ["rag", "архитектура", "retrieval", "generation"],
+        "level": "expert", 
+        "boost": 2.0
+      },
+      {
+        "skill": "Multi-Agent Systems",
+        "searchTerms": ["multiagent", "мультиагент", "агенты", "оркестрация"],
+        "level": "advanced",
+        "boost": 1.8
+      }
+    ],
+    "projects": [
+      {
+        "id": 1,
+        "title": "Face-Swap Bot",
+        "searchTerms": ["face-swap", "telegram", "бот", "стикеры", "новые люди", "viral"],
+        "featured": true,
+        "boost": 1.8
+      },
+      {
+        "id": 2,
+        "title": "Mistral Lawyer",
+        "searchTerms": ["mistral", "юрист", "консультации", "function calling"],
+        "featured": true,
+        "boost": 1.8
+      },
+      {
+        "id": 3,
+        "title": "YClients MCP",
+        "searchTerms": ["yclients", "mcp", "claude", "администратор"],
+        "featured": true,
+        "boost": 1.5
+      },
+      {
+        "id": 4,
+        "title": "Multiagent Team",
+        "searchTerms": ["multiagent", "команда", "агенты", "cursor", "5x ускорение"],
+        "featured": true,
+        "boost": 2.0
+      }
+    ]
+  },
+  
+  "searchConfig": {
+    "fuzzyThreshold": 0.7,
+    "maxResults": 5,
+    "boostFactors": {
+      "exactMatch": 3.0,
+      "keywordMatch": 2.0,
+      "fuzzyMatch": 1.0,
+      "categoryMatch": 1.5
+    },
+    "searchFields": [
+      "title",
+      "content", 
+      "keywords",
+      "searchTerms",
+      "technologies",
+      "features"
+    ]
+  },
+
+  "quickResponses": {
+    "greeting": [
+      "Привет! Я AI-ассистент, который знает все о профессиональном опыте и проектах. Задайте любой вопрос!",
+      "Добро пожаловать! Спросите меня о RAG системах, Mistral API, мультиагентных проектах или любой другой экспертизе."
+    ],
+    "unknown": [
+      "Интересный вопрос! Хотя у меня нет точной информации по этой теме, я могу рассказать о связанных проектах и опыте.",
+      "Этой информации нет в моей базе знаний, но я могу поделиться релевантным опытом из похожих проектов."
+    ],
+    "clarification": [
+      "Можете уточнить ваш вопрос? Например, интересует ли вас техническая реализация или бизнес-результаты?",
+      "Хотели бы узнать больше деталей? Я могу рассказать о технологиях, архитектуре или результатах проекта."
+    ]
+  },
+
+  "contextualSuggestions": {
+    "afterMistral": [
+      "Хотите узнать о других LLM интеграциях?",
+      "Интересно как это сочетается с RAG системами?",
+      "Расскажу о Function Calling в других проектах?"
+    ],
+    "afterRAG": [
+      "Интересуют векторные базы данных?", 
+      "Хотите узнать о конкретных RAG проектах?",
+      "Расскажу о embedding стратегиях?"
+    ],
+    "afterMultiagent": [
+      "Интересует оркестрация агентов?",
+      "Хотите узнать о каждом агенте отдельно?",
+      "Расскажу как достигается 5x ускорение?"
+    ]
+  },
+
+  "trendingTopics": [
+    {
+      "topic": "Mistral API интеграция",
+      "frequency": 28,
+      "keywords": ["mistral", "api", "интеграция"]
+    },
+    {
+      "topic": "RAG архитектура",
+      "frequency": 45,
+      "keywords": ["rag", "архитектура", "retrieval"]
+    },
+    {
+      "topic": "Multiagent системы", 
+      "frequency": 32,
+      "keywords": ["multiagent", "агенты", "команда"]
+    },
+    {
+      "topic": "Prompt Engineering",
+      "frequency": 38,
+      "keywords": ["prompt", "промпт", "инжиниринг"]
+    }
+  ],
+
+  "metadata": {
+    "totalDocuments": 9,
+    "totalProjects": 5,
+    "totalSkills": 24,
+    "indexVersion": "1.0",
+    "lastUpdated": "2025-01-09",
+    "searchAlgorithm": "weighted_fuzzy_match"
+  }
+}
