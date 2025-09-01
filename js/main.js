@@ -74,7 +74,7 @@ class WebResumeApp {
         this.components.navigation = new NavigationComponent();
         
         // RAG Чат
-        this.components.ragChat = new RAGChatComponent(this.config.apiBaseUrl);
+        this.components.ragChat = new RAGChat('chat');
         
         // Мультиагентная визуализация
         this.components.multiagentViz = new MultiagentVisualization();
@@ -139,11 +139,8 @@ class WebResumeApp {
         console.log('📊 Загрузка данных...');
         
         try {
-            // Загружаем базу знаний
-            const knowledgeBase = await this.loadJSON('./data/knowledge-base.json');
-            if (knowledgeBase) {
-                this.components.ragChat.setKnowledgeBase(knowledgeBase);
-            }
+            // RAG Chat загружает базу знаний самостоятельно
+            console.log('📚 RAG Chat загружает базу знаний самостоятельно...');
 
             // Загружаем проекты
             console.log('🔄 Начинаем загрузку проектов...');
@@ -166,17 +163,11 @@ class WebResumeApp {
                 this.components.skillsManager.render();
             }
 
-            // Загружаем предложенные вопросы
-            const suggestedQuestions = await this.loadJSON('./data/suggested-questions.json');
-            if (suggestedQuestions) {
-                this.components.ragChat.setSuggestedQuestions(suggestedQuestions);
-            }
+            // Предложенные вопросы загружаются автоматически в RAGChat
+            console.log('❓ RAG Chat загружает предложенные вопросы самостоятельно...');
 
-            // Загружаем индекс поиска
-            const searchIndex = await this.loadJSON('./data/search-index.json');
-            if (searchIndex) {
-                this.components.ragChat.setSearchIndex(searchIndex);
-            }
+            // Индекс поиска загружается автоматически в RAGChat
+            console.log('🔍 RAG Chat загружает индекс поиска самостоятельно...');
 
             console.log('✅ Все данные успешно загружены');
 
@@ -407,21 +398,155 @@ class NavigationComponent {
     }
 }
 
-// ===== RAG CHAT КОМПОНЕНТ (заглушка) =====
+// ===== RAG CHAT КОМПОНЕНТ =====
 
-class RAGChatComponent {
-    constructor(apiBaseUrl) {
-        this.apiBaseUrl = apiBaseUrl;
+class RAGChat {
+    constructor(containerId = 'chat') {
+        this.containerId = containerId;
+        this.container = document.getElementById(containerId);
         this.knowledgeBase = null;
+        this.chatHistory = [];
+        this.suggestedQuestions = null;
+        this.searchIndex = null;
+        
+        // UI элементы (инициализируются в renderChatInterface)
+        this.chatMessages = null;
+        this.chatInput = null;
+        this.sendButton = null;
+        this.suggestions = null;
+        
+        this.init();
+    }
+
+    async init() {
+        try {
+            console.log('🤖 Инициализация RAG Chat...');
+            
+            // 1. Загружаем базу знаний
+            await this.loadKnowledgeBase();
+            
+            // 2. Рендерим интерфейс чата (если контейнер найден)
+            if (this.container) {
+                this.renderChatInterface();
+            } else {
+                console.warn('⚠️ Контейнер чата не найден:', this.containerId);
+                return;
+            }
+            
+            // 3. Настраиваем обработчики событий
+            this.setupEventListeners();
+            
+            console.log('✅ RAG Chat успешно инициализирован');
+        } catch (error) {
+            console.error('❌ Ошибка инициализации RAG Chat:', error);
+            this.showErrorState();
+        }
+    }
+
+    async loadKnowledgeBase() {
+        try {
+            // Загружаем основную базу знаний
+            const knowledgeResponse = await fetch('./data/knowledge-base.json');
+            this.knowledgeBase = await knowledgeResponse.json();
+            console.log('📚 База знаний загружена:', this.knowledgeBase.documents?.length, 'документов');
+            
+            // Загружаем предложенные вопросы
+            const questionsResponse = await fetch('./data/suggested-questions.json');
+            this.suggestedQuestions = await questionsResponse.json();
+            console.log('❓ Загружено вопросов:', this.suggestedQuestions.categories?.length, 'категорий');
+            
+            // Загружаем поисковый индекс
+            const searchResponse = await fetch('./data/search-index.json');
+            this.searchIndex = await searchResponse.json();
+            console.log('🔍 Индекс поиска загружен');
+            
+        } catch (error) {
+            console.error('❌ Ошибка загрузки базы знаний:', error);
+            // Используем fallback данные
+            this.knowledgeBase = this.getFallbackData();
+            this.suggestedQuestions = this.getFallbackQuestions();
+        }
+    }
+
+    renderChatInterface() {
+        if (!this.container) return;
+        
+        this.container.innerHTML = `
+            <div class="chat-container">
+                <div class="chat-header">
+                    <h3 class="chat-title">
+                        <i data-lucide="bot" style="width: 1.25em; height: 1.25em;"></i>
+                        AI Ассистент
+                    </h3>
+                    <div class="chat-status">
+                        <div class="chat-status-indicator"></div>
+                        <span>Онлайн</span>
+                    </div>
+                </div>
+                
+                <div class="chat-messages custom-scrollbar" id="chat-messages">
+                    ${this.renderWelcomeMessage()}
+                </div>
+                
+                <!-- Chat States -->
+                <div class="chat-empty-state" id="chat-empty-state" style="display: none;">
+                    <div class="chat-empty-icon">
+                        <i data-lucide="message-circle" style="width: 3rem; height: 3rem; opacity: 0.5;"></i>
+                    </div>
+                    <h3 class="chat-empty-title">Начните диалог</h3>
+                    <p class="chat-empty-description">Выберите один из предложенных вопросов или напишите свой</p>
+                </div>
+                
+                <div class="chat-loading-state" id="chat-loading-state" style="display: none;">
+                    <div class="chat-loading-spinner">
+                        <div class="chat-spinner"></div>
+                    </div>
+                    <p class="chat-loading-text">Инициализация AI-ассистента...</p>
+                </div>
+                
+                <div class="chat-error-state" id="chat-error-state" style="display: none;">
+                    <div class="chat-error-icon">
+                        <i data-lucide="alert-circle" style="width: 2.5rem; height: 2.5rem; color: var(--error);"></i>
+                    </div>
+                    <h3 class="chat-error-title">Ошибка подключения</h3>
+                    <p class="chat-error-description">Не удалось связаться с AI-ассистентом. Попробуйте обновить страницу.</p>
+                    <button class="chat-retry-btn" id="chat-retry-btn">
+                        <i data-lucide="refresh-cw" style="width: 1em; height: 1em;"></i>
+                        Попробовать снова
+                    </button>
+                </div>
+                
+                <div class="chat-suggestions" id="chat-suggestions">
+                    ${this.renderSuggestedQuestions()}
+                </div>
+                
+                <div class="chat-input-container">
+                    <textarea 
+                        class="chat-input" 
+                        id="chat-input"
+                        placeholder="Напишите ваш вопрос..."
+                        rows="1"
+                        aria-label="Поле ввода сообщения чата"></textarea>
+                    <button class="chat-send-btn" id="chat-send-btn" aria-label="Отправить сообщение">
+                        <i data-lucide="send" style="width: 1.25em; height: 1.25em;"></i>
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        // Инициализируем UI элементы после рендеринга
         this.chatMessages = document.getElementById('chat-messages');
         this.chatInput = document.getElementById('chat-input');
         this.sendButton = document.getElementById('chat-send-btn');
         this.suggestions = document.querySelectorAll('.chat-suggestion');
         
-        this.init();
+        // Инициализируем Lucide иконки
+        if (window.lucide) {
+            window.lucide.createIcons();
+        }
     }
 
-    init() {
+    setupEventListeners() {
         if (this.sendButton) {
             this.sendButton.addEventListener('click', this.sendMessage.bind(this));
         }
@@ -435,31 +560,34 @@ class RAGChatComponent {
             });
         }
 
-        this.suggestions.forEach(suggestion => {
-            suggestion.addEventListener('click', () => {
-                const question = suggestion.getAttribute('data-question');
-                if (question && this.chatInput) {
-                    this.chatInput.value = question;
-                    this.sendMessage();
-                }
+        // Обновляем обработчики для suggested questions
+        this.updateSuggestedQuestions();
+        
+        // Обработчик для кнопки retry
+        const retryBtn = document.getElementById('chat-retry-btn');
+        if (retryBtn) {
+            retryBtn.addEventListener('click', () => {
+                this.hideErrorState();
+                this.init();
             });
-        });
+        }
     }
 
+    // Методы для обратной совместимости (deprecated - используйте loadKnowledgeBase())
     setKnowledgeBase(knowledgeBase) {
         this.knowledgeBase = knowledgeBase;
-        console.log('📚 База знаний загружена:', knowledgeBase.documents?.length, 'документов');
+        console.log('📚 База знаний загружена (deprecated method):', knowledgeBase.documents?.length, 'документов');
     }
 
     setSuggestedQuestions(suggestedQuestions) {
         this.suggestedQuestions = suggestedQuestions;
         this.updateSuggestedQuestions();
-        console.log('❓ Загружено вопросов:', suggestedQuestions.categories?.length, 'категорий');
+        console.log('❓ Загружено вопросов (deprecated method):', suggestedQuestions.categories?.length, 'категорий');
     }
 
     setSearchIndex(searchIndex) {
         this.searchIndex = searchIndex;
-        console.log('🔍 Индекс поиска загружен');
+        console.log('🔍 Индекс поиска загружен (deprecated method)');
     }
 
     updateSuggestedQuestions() {
@@ -493,52 +621,81 @@ class RAGChatComponent {
         const message = this.chatInput?.value.trim();
         if (!message) return;
 
+        // Добавляем сообщение пользователя
         this.addMessage(message, 'user');
+        this.addToHistory(message, 'user');
         this.chatInput.value = '';
+        
+        // Показываем индикатор печатания
         this.showTypingIndicator();
+        
+        // Блокируем кнопку отправки
+        if (this.sendButton) {
+            this.sendButton.disabled = true;
+        }
 
         try {
-            const responseData = await this.generateResponseWithSources(message);
+            // Обрабатываем сообщение пользователя
+            const responseData = await this.handleUserMessage(message);
+            
             this.hideTypingIndicator();
             this.addMessage(responseData.text, 'assistant', responseData.sources);
+            this.addToHistory(responseData.text, 'assistant');
+            
         } catch (error) {
             this.hideTypingIndicator();
-            this.addMessage('Извините, произошла ошибка. Попробуйте еще раз.', 'assistant');
-            console.error('Ошибка RAG чата:', error);
+            const errorMessage = 'Извините, произошла ошибка при обработке вашего запроса. Попробуйте еще раз.';
+            this.addMessage(errorMessage, 'assistant');
+            console.error('❌ Ошибка RAG чата:', error);
+        } finally {
+            // Разблокируем кнопку отправки
+            if (this.sendButton) {
+                this.sendButton.disabled = false;
+            }
         }
     }
 
-    async generateResponse(message) {
-        await new Promise(resolve => setTimeout(resolve, 1500));
+    async handleUserMessage(message) {
+        // Основная логика обработки сообщения пользователя согласно спецификации
         
-        // Используем улучшенные демо-ответы из базы знаний
-        if (this.knowledgeBase?.demoResponses) {
-            const lowerMessage = message.toLowerCase();
-            
-            // Проверяем демо-ответы
-            for (const [key, response] of Object.entries(this.knowledgeBase.demoResponses)) {
-                if (lowerMessage.includes(key)) {
-                    return response;
-                }
-            }
+        // 1. Поиск релевантного контекста
+        const context = this.searchKnowledge(message);
+        
+        // 2. В production: вызов LLM API
+        // const response = await this.callLLMAPI(message, context);
+        
+        // 3. Fallback для демо
+        const response = await this.generateDemoResponse(message, context);
+        
+        return response;
+    }
+
+    async generateDemoResponse(message, context) {
+        // Имитируем задержку API
+        await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 1500));
+        
+        // Используем улучшенную логику генерации ответов с источниками
+        return await this.generateResponseWithSources(message);
+    }
+
+    addToHistory(message, sender) {
+        this.chatHistory.push({
+            message,
+            sender,
+            timestamp: new Date().toISOString()
+        });
+        
+        // Ограничиваем историю последними 20 сообщениями
+        if (this.chatHistory.length > 20) {
+            this.chatHistory = this.chatHistory.slice(-20);
         }
+    }
 
-        // Поиск в документах базы знаний
-        if (this.knowledgeBase?.documents) {
-            const relevantDoc = this.searchKnowledgeBase(message);
-            if (relevantDoc) {
-                return `${relevantDoc.content}\n\n💡 *Источник: ${relevantDoc.title}*`;
-            }
-        }
-
-        // Fallback responses
-        const fallbackResponses = [
-            'Спасибо за вопрос! Я специализируюсь на Prompt Engineering, RAG системах и мультиагентных решениях. Уточните, что именно вас интересует?',
-            'Интересная тема! Хотя точной информации по этому вопросу нет, я могу рассказать о релевантном опыте из моих проектов.',
-            'Могу поделиться опытом из схожих проектов. Например, в работе с Mistral API или RAG системами я сталкивался с похожими задачами.'
-        ];
-
-        return fallbackResponses[Math.floor(Math.random() * fallbackResponses.length)];
+    // Deprecated: используйте generateDemoResponse() или generateResponseWithSources()
+    async generateResponse(message) {
+        console.warn('⚠️ generateResponse() deprecated. Используйте generateDemoResponse()');
+        const response = await this.generateDemoResponse(message, []);
+        return response.text;
     }
 
     async generateResponseWithSources(message) {
@@ -610,25 +767,189 @@ class RAGChatComponent {
         return { text: responseText, sources: sources };
     }
 
-    searchKnowledgeBase(query) {
-        if (!this.knowledgeBase?.documents) return null;
+    renderWelcomeMessage() {
+        return `
+            <div class="chat-message">
+                <div class="chat-message-avatar">AI</div>
+                <div class="chat-message-content">
+                    <p>Привет! Я AI-ассистент, который знает все о профессиональном опыте и проектах Александра. Задайте любой вопрос!</p>
+                    <div class="chat-message-time">Сейчас</div>
+                </div>
+            </div>
+        `;
+    }
+
+    renderSuggestedQuestions() {
+        if (!this.suggestedQuestions?.quickQuestions) {
+            return `
+                <button class="chat-suggestion" data-question="Расскажи о твоем опыте с LLM и промпт-инжинирингом">
+                    <i data-lucide="brain" style="width: 1em; height: 1em;"></i>
+                    Опыт с LLM
+                </button>
+                <button class="chat-suggestion" data-question="Какие проекты с RAG-системами ты реализовал?">
+                    <i data-lucide="search" style="width: 1em; height: 1em;"></i>
+                    RAG проекты
+                </button>
+                <button class="chat-suggestion" data-question="Какой у тебя технический стек для ИИ разработки?">
+                    <i data-lucide="layers" style="width: 1em; height: 1em;"></i>
+                    Технический стек
+                </button>
+                <button class="chat-suggestion" data-question="Как работает мультиагентная команда из 7 ИИ-агентов?">
+                    <i data-lucide="users" style="width: 1em; height: 1em;"></i>
+                    Мультиагентные системы
+                </button>
+            `;
+        }
+
+        return this.suggestedQuestions.quickQuestions.slice(0, 4).map(question => `
+            <button class="chat-suggestion" data-question="${question}">
+                <i data-lucide="help-circle" style="width: 1em; height: 1em;"></i>
+                ${question.length > 25 ? question.substring(0, 25) + '...' : question}
+            </button>
+        `).join('');
+    }
+
+    getFallbackData() {
+        return {
+            documents: [
+                {
+                    id: "experience-llm",
+                    title: "Опыт с LLM и Prompt Engineering",
+                    content: "Специализируюсь на разработке интеллектуальных систем с использованием LLM. Имею опыт работы с Mistral API, создания RAG-архитектур и мультиагентных команд.",
+                    keywords: ["llm", "prompt", "mistral", "ai", "архитектура"],
+                    category: "experience"
+                },
+                {
+                    id: "projects-rag",
+                    title: "RAG проекты",
+                    content: "Реализовал несколько RAG-систем: для бухгалтерской компании, нейро-юриста с 95% автоматизации, MCP Server для YClients с 24/7 работой.",
+                    keywords: ["rag", "проект", "автоматизация", "бизнес"],
+                    category: "projects"
+                },
+                {
+                    id: "tech-stack",
+                    title: "Технический стек",
+                    content: "Использую современные технологии: Mistral API, LangChain, Vector Databases, Docker, n8n, Claude API, Telegram Bot API для создания ИИ-решений.",
+                    keywords: ["стек", "технологии", "mistral", "langchain", "docker"],
+                    category: "technology"
+                }
+            ],
+            categories: ["experience", "projects", "technology"],
+            demoResponses: {
+                "llm": "Мой опыт с LLM включает работу с Mistral API и создание промпт-архитектур для различных бизнес-задач.",
+                "rag": "Реализовал несколько RAG-систем с высокой точностью поиска и автоматизацией процессов.",
+                "проект": "В портфолио есть проекты Face-Swap Bot, RAG для бизнеса, Нейро-Юрист и мультиагентная команда."
+            }
+        };
+    }
+
+    getFallbackQuestions() {
+        return {
+            quickQuestions: [
+                "Расскажи о твоем опыте с LLM",
+                "Какие RAG проекты ты реализовал?",
+                "Твой технический стек",
+                "Как работает мультиагентная команда?"
+            ],
+            categories: [
+                {
+                    name: "Опыт и экспертиза",
+                    questions: ["Опыт с LLM", "Промпт-инжиниринг", "Архитектура ИИ"]
+                }
+            ]
+        };
+    }
+
+    showErrorState() {
+        const errorState = document.getElementById('chat-error-state');
+        const chatMessages = document.getElementById('chat-messages');
+        const suggestions = document.getElementById('chat-suggestions');
+        
+        if (errorState) errorState.style.display = 'flex';
+        if (chatMessages) chatMessages.style.display = 'none';
+        if (suggestions) suggestions.style.display = 'none';
+    }
+
+    hideErrorState() {
+        const errorState = document.getElementById('chat-error-state');
+        const chatMessages = document.getElementById('chat-messages');
+        const suggestions = document.getElementById('chat-suggestions');
+        
+        if (errorState) errorState.style.display = 'none';
+        if (chatMessages) chatMessages.style.display = 'flex';
+        if (suggestions) suggestions.style.display = 'flex';
+    }
+
+    showLoadingState() {
+        const loadingState = document.getElementById('chat-loading-state');
+        const chatMessages = document.getElementById('chat-messages');
+        
+        if (loadingState) loadingState.style.display = 'flex';
+        if (chatMessages) chatMessages.style.display = 'none';
+    }
+
+    hideLoadingState() {
+        const loadingState = document.getElementById('chat-loading-state');
+        const chatMessages = document.getElementById('chat-messages');
+        
+        if (loadingState) loadingState.style.display = 'none';
+        if (chatMessages) chatMessages.style.display = 'flex';
+    }
+
+    searchKnowledge(query) {
+        if (!this.knowledgeBase?.documents) return [];
 
         const lowerQuery = query.toLowerCase();
+        const keywords = lowerQuery.split(' ').filter(word => word.length > 2);
+        const relevantDocs = [];
         
-        // Простой поиск по ключевым словам и содержимому
+        // Поиск по документам с вычислением релевантности
         for (const doc of this.knowledgeBase.documents) {
-            const hasKeywordMatch = doc.keywords?.some(keyword => 
-                lowerQuery.includes(keyword.toLowerCase())
-            );
+            let relevanceScore = 0;
             
-            const hasContentMatch = doc.content?.toLowerCase().includes(lowerQuery.split(' ')[0]);
+            // Поиск в заголовке (вес 3)
+            if (doc.title?.toLowerCase().includes(lowerQuery)) {
+                relevanceScore += 3;
+            }
             
-            if (hasKeywordMatch || hasContentMatch) {
-                return doc;
+            // Поиск в ключевых словах (вес 2)
+            if (doc.keywords) {
+                for (const keyword of doc.keywords) {
+                    if (keywords.some(q => keyword.toLowerCase().includes(q))) {
+                        relevanceScore += 2;
+                    }
+                }
+            }
+            
+            // Поиск в содержимом (вес 1)
+            if (doc.content) {
+                for (const keyword of keywords) {
+                    const regex = new RegExp(keyword, 'gi');
+                    const matches = doc.content.match(regex);
+                    if (matches) {
+                        relevanceScore += matches.length;
+                    }
+                }
+            }
+            
+            if (relevanceScore > 0) {
+                relevantDocs.push({
+                    ...doc,
+                    relevance: relevanceScore
+                });
             }
         }
         
-        return null;
+        // Сортируем по релевантности и возвращаем топ-3
+        return relevantDocs
+            .sort((a, b) => b.relevance - a.relevance)
+            .slice(0, 3);
+    }
+
+    // Для обратной совместимости
+    searchKnowledgeBase(query) {
+        const results = this.searchKnowledge(query);
+        return results.length > 0 ? results[0] : null;
     }
 
     addMessage(content, sender, sources = null) {
@@ -1432,10 +1753,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Экспортируем компоненты для использования в других файлах
 window.WebResumeComponents = {
-    RAGChatComponent,
+    RAGChat,
     MultiagentVisualization,
     AIReadinessChecklist,
     ProjectsManager,
     SkillsManager,
     UtilsHelper
 };
+
