@@ -1047,14 +1047,15 @@ class InteractiveEffects {
     init() {
         this.initMouseTrackingCards();
         this.initPulseAnimations();
+        this.initTechStackInteractions();
         console.log('🎭 Интерактивные эффекты инициализированы');
     }
 
     initMouseTrackingCards() {
-        const expertiseCards = document.querySelectorAll('.expertise-card-interactive');
+        const expertiseCards = document.querySelectorAll('.expertise-card-compact');
         
         expertiseCards.forEach(card => {
-            const cardGlow = card.querySelector('.card-glow');
+            const cardGlow = card.querySelector('.card-glow-effect');
             
             if (cardGlow) {
                 card.addEventListener('mousemove', (e) => {
@@ -1085,17 +1086,21 @@ class InteractiveEffects {
 
     // Добавляем функцию для технических карточек с hover эффектами
     initTechStackInteractions() {
-        const techCards = document.querySelectorAll('.tech-item-card');
+        const techChips = document.querySelectorAll('.tech-chip');
         
-        techCards.forEach(card => {
-            card.addEventListener('mouseenter', () => {
+        techChips.forEach(chip => {
+            chip.addEventListener('mouseenter', () => {
                 // Добавляем дополнительный glow эффект
-                card.style.boxShadow = '0 8px 25px rgba(59, 130, 246, 0.3)';
+                if (chip.classList.contains('featured')) {
+                    chip.style.boxShadow = '0 12px 30px rgba(59, 130, 246, 0.5)';
+                } else {
+                    chip.style.boxShadow = '0 8px 20px rgba(59, 130, 246, 0.2)';
+                }
             });
             
-            card.addEventListener('mouseleave', () => {
+            chip.addEventListener('mouseleave', () => {
                 // Убираем дополнительный эффект
-                card.style.boxShadow = '';
+                chip.style.boxShadow = '';
             });
         });
     }
