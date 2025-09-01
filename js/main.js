@@ -624,7 +624,18 @@ class ProjectsManager {
     }
 
     render() {
-        if (!this.container || !this.projects.length) return;
+        // Переинициализируем контейнер если он не найден
+        if (!this.container) {
+            this.container = document.getElementById('projects-grid');
+        }
+        
+        if (!this.container || !this.projects.length) {
+            console.warn('⚠️ Контейнер проектов не найден или нет данных:', {
+                container: !!this.container,
+                projectsCount: this.projects.length
+            });
+            return;
+        }
 
         // Показываем только топ 3 проекта изначально
         const featuredProjects = this.projects.filter(p => p.featured).slice(0, 3);
@@ -692,6 +703,12 @@ class ProjectsManager {
         }
 
         this.setupProjectInteractions();
+        
+        // Переинициализируем интерактивные эффекты для новых карточек
+        if (window.interactiveEffects) {
+            window.interactiveEffects.initMouseTrackingCards();
+            window.interactiveEffects.initPulseAnimations();
+        }
     }
 
     getProjectType(project) {
