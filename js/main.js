@@ -1037,10 +1037,80 @@ window.closeProjectModal = closeProjectModal;
 window.openContactModal = openContactModal;
 window.closeContactModal = closeContactModal;
 
+// ===== ИНТЕРАКТИВНЫЕ ЭФФЕКТЫ ДЛЯ КАРТОЧЕК ЭКСПЕРТИЗЫ =====
+
+class InteractiveEffects {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        this.initMouseTrackingCards();
+        this.initPulseAnimations();
+        console.log('🎭 Интерактивные эффекты инициализированы');
+    }
+
+    initMouseTrackingCards() {
+        const expertiseCards = document.querySelectorAll('.expertise-card-interactive');
+        
+        expertiseCards.forEach(card => {
+            const cardGlow = card.querySelector('.card-glow');
+            
+            if (cardGlow) {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    cardGlow.style.setProperty('--mouse-x', `${x}px`);
+                    cardGlow.style.setProperty('--mouse-y', `${y}px`);
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    cardGlow.style.removeProperty('--mouse-x');
+                    cardGlow.style.removeProperty('--mouse-y');
+                });
+            }
+        });
+    }
+
+    initPulseAnimations() {
+        // Добавляем случайную задержку для pulse анимаций
+        const pulseElements = document.querySelectorAll('.icon-pulse');
+        
+        pulseElements.forEach((element, index) => {
+            element.style.animationDelay = `${index * 0.7}s`;
+        });
+    }
+
+    // Добавляем функцию для технических карточек с hover эффектами
+    initTechStackInteractions() {
+        const techCards = document.querySelectorAll('.tech-item-card');
+        
+        techCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                // Добавляем дополнительный glow эффект
+                card.style.boxShadow = '0 8px 25px rgba(59, 130, 246, 0.3)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                // Убираем дополнительный эффект
+                card.style.boxShadow = '';
+            });
+        });
+    }
+}
+
 // ===== ИНИЦИАЛИЗАЦИЯ ПРИЛОЖЕНИЯ =====
 
 // Создаем глобальный экземпляр приложения
 window.webResumeApp = new WebResumeApp();
+
+// Инициализируем интерактивные эффекты
+document.addEventListener('DOMContentLoaded', () => {
+    const interactiveEffects = new InteractiveEffects();
+    window.interactiveEffects = interactiveEffects;
+});
 
 // Экспортируем компоненты для использования в других файлах
 window.WebResumeComponents = {
